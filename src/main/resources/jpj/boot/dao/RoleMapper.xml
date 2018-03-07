@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jpj.boot.dao.RoleMapper" >
+  <resultMap id="BaseResultMap" type="jpj.boot.entity.Role" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="userId" property="userId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, pid, name
+  </sql>
+  <sql id="User_Role_Column_List" >
+    tr.id, tr.pid, tr.name,tur.user_id userId
+  </sql>
+  <select id="selectRoleByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="User_Role_Column_List" />
+    from t_user_role tur
+    LEFT JOIN t_role tr
+    ON tur.role_id = tr.id
+    where tur.user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from t_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="listAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from t_role
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteRoleEnumByRoleId" parameterType="java.lang.Integer" >
+    delete from t_role_enum
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteUserRoleByUserId" parameterType="java.lang.Integer" >
+    delete from t_user_role
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="jpj.boot.entity.Role" >
+    insert into t_role (id, pid, name
+      )
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertRoleEnums" >
+    insert into t_role_enum (role_id, enum_id, create_time
+    )
+    values
+    <foreach collection="enumIds" item="item" separator=",">
+      (#{roleId}, #{item}, NOW())
+    </foreach>
+  </insert>
+  <insert id="insertUserRole" >
+    insert into t_user_role (user_id, role_id)
+    values (#{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="jpj.boot.entity.Role" >
+    insert into t_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="jpj.boot.entity.Role" >
+    update t_role
+    <set >
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="jpj.boot.entity.Role" >
+    update t_role
+    set pid = #{pid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

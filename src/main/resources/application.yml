@@ -1,0 +1,35 @@
+server:
+  port: 80
+  session:
+    timeout: 1800
+
+spring:
+  profiles:
+    active:
+      - dev
+      - ignoreurl
+      - mybatis
+      - converter
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  freemarker:
+    template-loader-path: classpath:/templates/
+  mvc:
+    static-path-pattern: /public/**
+    favicon:
+      enabled: false
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
+
+
+logging:
+  config: classpath:log4j2.xml
+
+

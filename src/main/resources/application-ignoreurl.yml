@@ -1,0 +1,3 @@
+ignoreLoginList:
+  /,/login,/user/login,/reset,/user/resetSubmit
+

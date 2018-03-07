@@ -1,0 +1,9 @@
+serializerFeatures:
+  - QuoteFieldNames
+  - WriteMapNullValue
+  - WriteNullStringAsEmpty
+  - WriteNullBooleanAsFalse
+  - WriteNullListAsEmpty
+  - WriteNullNumberAsZero
+  - WriteDateUseDateFormat
+  - DisableCircularReferenceDetect
