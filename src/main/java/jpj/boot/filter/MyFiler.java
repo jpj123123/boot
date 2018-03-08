@@ -1,12 +1,12 @@
 package jpj.boot.filter;
 
+import jpj.boot.application.ApplicatoinConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -23,12 +23,11 @@ import java.util.List;
 @Order(1)
 @Slf4j
 public class MyFiler implements Filter {
-    @Value("#{'${ignoreLoginList}'.split(',')}")
-    private List<String> ignoreLoginList;
-
+    @Resource
+    private ApplicatoinConfig config;
+    //private List<String> ignoreLoginList = config.getListLoginUrl();
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
     }
 
     @Override
@@ -51,7 +50,7 @@ public class MyFiler implements Filter {
             return;
         }
         //开发先注释掉
-        if (!ignoreLoginList.contains(request.getRequestURI())) {
+        if (!config.getIgnoreLoginUrlList().contains(request.getRequestURI())) {
             //获取登录姓名
             String name = (String) request.getSession().getAttribute(request.getSession().getId());
             Integer id = (Integer) request.getSession().getAttribute(name);

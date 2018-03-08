@@ -1,3 +1,9 @@
-ignoreLoginList:
-  /,/login,/user/login,/reset,/user/resetSubmit
+ignore:
+    ignoreLoginUrlList:
+      - /
+      - /login
+      - /user/login
+      - /reset
+      - /user/resetSubmit
+      - /error
 

@@ -1,6 +1,8 @@
-package jpj.boot.converter;
+package jpj.boot.configuration;
 
 import com.alibaba.fastjson.JSON;
+import jpj.boot.converter.MyHttpConverter;
+import jpj.boot.converter.StringHttpConverter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
