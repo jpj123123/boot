@@ -19,8 +19,23 @@
     select 
     <include refid="Base_Column_List" />
     from t_goods
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER} AND isused=1
   </select>
+
+  <select id="selectByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_goods
+    where code = #{code,jdbcType=VARCHAR} AND isused=1
+  </select>
+
+  <select id="listAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_goods
+    WHERE isused=1
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_goods
     where id = #{id,jdbcType=INTEGER}
@@ -134,6 +149,12 @@
       isused = #{isused,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="deleteGoodsByPrimaryKey" parameterType="java.lang.Integer" >
+    update t_goods
+    isused = 0,
+    update_time = NOW()
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

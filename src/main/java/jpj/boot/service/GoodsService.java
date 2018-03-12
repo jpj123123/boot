@@ -1,10 +1,15 @@
-package jpj.boot.dao;
+package jpj.boot.service;
 
 import jpj.boot.entity.Goods;
 
 import java.util.List;
 
-public interface GoodsMapper {
+/**
+ * @Author: jingpj
+ * @Date：creste in 2018/3/12
+ */
+public interface GoodsService {
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(Goods record);

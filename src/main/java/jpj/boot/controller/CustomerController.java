@@ -68,7 +68,7 @@ public class CustomerController {
         customer.setAddress(dto.getAddress().trim());
         customer.setName(dto.getName().trim());
         customer.setPhone(dto.getPhone().trim());
-        customer.setUserId(dto.getUserId());
+        //customer.setUserId(dto.getUserId());
         customer.setMoney(dto.getMoney());
         return customerService.insertSelective(customer) > 0;
     }
@@ -104,7 +104,7 @@ public class CustomerController {
         customer.setAddress(dto.getAddress().trim());
         customer.setName(dto.getName().trim());
         customer.setPhone(dto.getPhone().trim());
-        customer.setUserId(dto.getUserId());
+        //customer.setUserId(dto.getUserId());
         customer.setMoney(dto.getMoney());
         return customerService.updateByPrimaryKeySelective(customer) > 0;
     }

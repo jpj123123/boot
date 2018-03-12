@@ -67,10 +67,10 @@
                 <label for="money">余额:</label>
                 <input class="easyui-validatebox" type="text" name="money" value="0" data-options="required:true"/>单位（分）
             </div>
-            <div>
+            <#--<div>
                 <label for="userId">所属用户id:</label>
                 <input class="easyui-validatebox" type="text" name="userId"/>
-            </div>
+            </div>-->
         </form>
     </div>
     <div data-options="region:'south'" style="height:40px;text-align:right;padding:5px;">
