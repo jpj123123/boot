@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,10 +58,22 @@ public class GoodsController {
     @RequestMapping("/addGoodsSubmit")
     public boolean addGoodsSubmit(HttpServletRequest request, SubmitGoodsDto dto) {
         BeanValidator.validator(dto);
-        goodsService.selectByCode(dto.getCode());
-        logger.info("userId:"+ HttpSessionUtil.getUserId(request.getSession())+"新增商品--手机号："+ dto.getName());
-       Goods goods = new Goods();
-       //todo
+        Goods selGoods = goodsService.selectByCode(dto.getCode());
+        if(selGoods != null){
+            throw new BuisnessException("商品编号已存在，请修改后再提交");
+        }
+        logger.info("userId:{}新增商品--商品名：{} 商品编号：{}", HttpSessionUtil.getUserId(request.getSession()), dto.getName(), dto.getCode());
+
+        Goods goods = new Goods();
+        goods.setCode(dto.getCode());
+        goods.setName(dto.getName());
+        goods.setIslist(dto.getIslist());
+        goods.setCost(dto.getCost());
+        goods.setPrice(dto.getPrice());
+        goods.setIsused(true);
+        Date current = new Date();
+        goods.setCreateTime(current);
+        goods.setUpdateTime(current);
         return goodsService.insertSelective(goods) > 0;
     }
 
@@ -83,12 +96,19 @@ public class GoodsController {
         if (selGoods == null) {
             throw new BuisnessException("用户不存在！");
         }
-        if (StringUtils.equals(selGoods.getCode(), dto.getCode())) {
+        if (!StringUtils.equals(selGoods.getCode(), dto.getCode())) {
             throw new BuisnessException("编码不允许修改！");
         }
         logger.info("userId:"+ HttpSessionUtil.getUserId(request.getSession())+"更新用户：id"+ dto.getId());
         Goods goods = new Goods();
-        //todo
+        goods.setId(dto.getId());
+        goods.setCode(dto.getCode());
+        goods.setName(dto.getName());
+        goods.setIslist(dto.getIslist());
+        goods.setCost(dto.getCost());
+        goods.setPrice(dto.getPrice());
+        Date current = new Date();
+        goods.setUpdateTime(current);
         return goodsService.updateByPrimaryKeySelective(goods) > 0;
     }
 

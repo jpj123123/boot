@@ -5,10 +5,10 @@
             singleSelect:true,
             columns: [[
                 {title: 'id', field: 'id', width: 50},
-                {title: '商品编码', field: 'code', width: 50},
-                {title: '商品名', field: 'name', width: 180},
-                {title: '成本价（单位分）', field: 'cost', width: 180},
-                {title: '单价', field: 'price', width: 100},
+                {title: '商品编码', field: 'code', width: 120},
+                {title: '商品名', field: 'name', width: 160},
+                {title: '成本价（单位分）', field: 'cost', width: 120},
+                {title: '单价（单位分）', field: 'price', width: 120},
                 {title: '是否上架（ 1上架 0 下架）', field: 'islist', width: 180},
                 {title: '创建时间', field: 'createTime', width: 180}
             ]],
