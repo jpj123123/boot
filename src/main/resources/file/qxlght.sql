@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50638
 File Encoding         : 65001
 
-Date: 2018-03-07 15:49:34
+Date: 2018-03-14 16:38:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,8 +29,14 @@ CREATE TABLE `t_customer` (
   `user_id` int(15) DEFAULT NULL COMMENT '所属用户',
   `isdelete` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否有效用户0 有效1 无效',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客户表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='客户表';
 
+-- ----------------------------
+-- Records of t_customer
+-- ----------------------------
+INSERT INTO `t_customer` VALUES ('1', '张三', null, '15814210062', '杞县县城', '50000', '2', '1');
+INSERT INTO `t_customer` VALUES ('2', '张三', null, '15814210062', '杞县县城', '100000', '2', '0');
+INSERT INTO `t_customer` VALUES ('3', '李四', null, '15814210036', '杞县县城城东', '100000', '2', '0');
 
 -- ----------------------------
 -- Table structure for `t_enum`
@@ -46,7 +52,7 @@ CREATE TABLE `t_enum` (
   `url` varchar(255) NOT NULL,
   `desc` int(5) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='菜单表';
 
 -- ----------------------------
 -- Records of t_enum
@@ -66,7 +72,7 @@ INSERT INTO `t_enum` VALUES ('13', '11', 'user_edit', '修改', 'icon-edit', '3'
 INSERT INTO `t_enum` VALUES ('14', '11', 'user_del', '删除', 'icon-remove', '3', '/user/delete', '4');
 INSERT INTO `t_enum` VALUES ('15', '11', 'add_user_role', '添加用户角色关联', 'icon-add', '3', '/user/addUserRole', '5');
 INSERT INTO `t_enum` VALUES ('16', '0', 'buisnessroot', '业务管理', '', '1', '#', '2');
-INSERT INTO `t_enum` VALUES ('17', '16', 'customerroot', '客户管理', '', '2', '/customer/list', '2');
+INSERT INTO `t_enum` VALUES ('17', '16', 'customerroot', '客户管理', '', '2', '/customer/list', '1');
 INSERT INTO `t_enum` VALUES ('18', '2', 'enum_list_all', '查询', 'icon-search', '3', '/enum/listEnumAll', '1');
 INSERT INTO `t_enum` VALUES ('19', '6', 'role_list_all', '查询', 'icon-search', '3', '/role/listAll', '1');
 INSERT INTO `t_enum` VALUES ('20', '11', 'user_list_all', '查询', 'icon-search', '3', '/user/listUser', '1');
@@ -74,6 +80,11 @@ INSERT INTO `t_enum` VALUES ('21', '17', 'customer_list_all', '查找', 'icon-se
 INSERT INTO `t_enum` VALUES ('22', '17', 'customer_add', '添加', 'icon-add', '3', '/customer/add', '2');
 INSERT INTO `t_enum` VALUES ('23', '17', 'customer_edit', '修改', 'icon-edit', '3', '/customer/edit', '3');
 INSERT INTO `t_enum` VALUES ('24', '17', 'customer_delete', '删除', 'icon-remove', '3', '/customer/delete', '4');
+INSERT INTO `t_enum` VALUES ('25', '16', 'goodsroot', '商品管理', '', '2', '/goods/list', '2');
+INSERT INTO `t_enum` VALUES ('26', '25', 'goods_list_aall', '查找', 'icon-search', '3', '/goods/listAll', '1');
+INSERT INTO `t_enum` VALUES ('27', '25', 'goods_add', '添加', 'icon-add', '3', '/goods/add', '2');
+INSERT INTO `t_enum` VALUES ('28', '25', 'goods_edit', '修改', 'icon-edit', '3', '/goods/edit', '3');
+INSERT INTO `t_enum` VALUES ('29', '25', 'goods_delete', '删除', 'icon-remove', '3', '/goods/delete', '4');
 
 -- ----------------------------
 -- Table structure for `t_goods`
@@ -90,11 +101,12 @@ CREATE TABLE `t_goods` (
   `create_time` timestamp NULL DEFAULT NULL,
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='商品表';
 
 -- ----------------------------
 -- Records of t_goods
 -- ----------------------------
+INSERT INTO `t_goods` VALUES ('1', 'yangyuan', '养元六个核桃', '5200', '6200', '1', '1', null, null);
 
 -- ----------------------------
 -- Table structure for `t_order`
@@ -149,13 +161,13 @@ CREATE TABLE `t_role` (
   `name` varchar(255) DEFAULT NULL COMMENT '角色名',
   PRIMARY KEY (`id`),
   UNIQUE KEY `un_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='角色表';
 
 -- ----------------------------
 -- Records of t_role
 -- ----------------------------
 INSERT INTO `t_role` VALUES ('1', '0', 'root');
-INSERT INTO `t_role` VALUES ('2', '1', '总经理');
+INSERT INTO `t_role` VALUES ('3', '1', '总经理');
 
 -- ----------------------------
 -- Table structure for `t_role_enum`
@@ -167,7 +179,7 @@ CREATE TABLE `t_role_enum` (
   `enum_id` int(15) NOT NULL COMMENT '菜单id',
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8 COMMENT='角色菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8 COMMENT='角色菜单表';
 
 -- ----------------------------
 -- Records of t_role_enum
@@ -177,25 +189,34 @@ INSERT INTO `t_role_enum` VALUES ('41', '3', '6', '2018-03-06 16:04:47');
 INSERT INTO `t_role_enum` VALUES ('42', '3', '8', '2018-03-06 16:04:47');
 INSERT INTO `t_role_enum` VALUES ('43', '3', '9', '2018-03-06 16:04:47');
 INSERT INTO `t_role_enum` VALUES ('44', '3', '10', '2018-03-06 16:04:47');
-INSERT INTO `t_role_enum` VALUES ('89', '1', '1', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('90', '1', '2', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('91', '1', '18', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('92', '1', '3', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('93', '1', '4', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('94', '1', '5', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('95', '1', '6', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('96', '1', '19', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('97', '1', '8', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('98', '1', '9', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('99', '1', '10', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('100', '1', '11', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('101', '1', '20', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('102', '1', '12', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('103', '1', '13', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('104', '1', '14', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('105', '1', '15', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('106', '1', '16', '2018-03-07 09:44:46');
-INSERT INTO `t_role_enum` VALUES ('107', '1', '17', '2018-03-07 09:44:46');
+INSERT INTO `t_role_enum` VALUES ('108', '1', '1', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('109', '1', '2', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('110', '1', '18', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('111', '1', '3', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('112', '1', '4', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('113', '1', '5', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('114', '1', '6', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('115', '1', '19', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('116', '1', '8', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('117', '1', '9', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('118', '1', '10', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('119', '1', '11', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('120', '1', '20', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('121', '1', '12', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('122', '1', '13', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('123', '1', '14', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('124', '1', '15', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('125', '1', '16', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('126', '1', '17', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('127', '1', '21', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('128', '1', '22', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('129', '1', '23', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('130', '1', '24', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('131', '1', '25', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('132', '1', '26', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('133', '1', '27', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('134', '1', '28', '2018-03-12 17:55:23');
+INSERT INTO `t_role_enum` VALUES ('135', '1', '29', '2018-03-12 17:55:23');
 
 -- ----------------------------
 -- Table structure for `t_user`
@@ -213,12 +234,13 @@ CREATE TABLE `t_user` (
   `create_time` timestamp NULL DEFAULT NULL,
   `update_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
 INSERT INTO `t_user` VALUES ('1', '0', 'admin', '123456', null, null, '鹤壁', '1', '2018-02-28 15:46:14', '2018-02-28 15:46:20');
+INSERT INTO `t_user` VALUES ('2', '1', 'jingpj', '123123', null, null, null, '1', '2018-03-06 18:28:24', '2018-03-06 18:28:24');
 
 -- ----------------------------
 -- Table structure for `t_user_role`
@@ -235,4 +257,4 @@ CREATE TABLE `t_user_role` (
 -- Records of t_user_role
 -- ----------------------------
 INSERT INTO `t_user_role` VALUES ('1', '1', '1');
-
+INSERT INTO `t_user_role` VALUES ('2', '2', '3');
