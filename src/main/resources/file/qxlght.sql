@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50638
 File Encoding         : 65001
 
-Date: 2018-03-14 16:38:47
+Date: 2018-03-14 23:22:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -96,6 +96,7 @@ CREATE TABLE `t_goods` (
   `name` varchar(255) NOT NULL COMMENT '商品名称',
   `cost` int(15) DEFAULT NULL COMMENT '进价：单位（分）',
   `price` int(15) DEFAULT NULL,
+  `count` int(15) unsigned NOT NULL DEFAULT '0' COMMENT '库存',
   `islist` tinyint(1) DEFAULT '1' COMMENT '是否上架 1上架 0 下架',
   `isused` tinyint(1) DEFAULT '1' COMMENT '是否有效 1有效 0无效',
   `create_time` timestamp NULL DEFAULT NULL,
@@ -106,7 +107,7 @@ CREATE TABLE `t_goods` (
 -- ----------------------------
 -- Records of t_goods
 -- ----------------------------
-INSERT INTO `t_goods` VALUES ('1', 'yangyuan', '养元六个核桃', '5200', '6200', '1', '1', null, null);
+INSERT INTO `t_goods` VALUES ('1', 'yangyuan', '养元六个核桃', '5200', '6200', '0', '1', '1', null, null);
 
 -- ----------------------------
 -- Table structure for `t_order`
@@ -123,13 +124,34 @@ CREATE TABLE `t_order` (
   `total_price` int(15) NOT NULL COMMENT '商品总价应收款',
   `pay_money` int(15) NOT NULL DEFAULT '0' COMMENT '支付金额',
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '订单状态0未付款1部分付款2全部付款',
-  `create_time` timestamp NOT NULL,
-  `update_time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表';
 
 -- ----------------------------
 -- Records of t_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `t_out_lib_log`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_out_lib_log`;
+CREATE TABLE `t_out_lib_log` (
+  `id` int(15) NOT NULL AUTO_INCREMENT,
+  `isout` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1出库0入库',
+  `user_id` int(15) NOT NULL COMMENT '用户id',
+  `user_name` varchar(40) NOT NULL COMMENT '用户名',
+  `goods_id` int(15) NOT NULL COMMENT '产品id',
+  `goods_name` varchar(255) NOT NULL COMMENT '产品名',
+  `goods_count` int(10) NOT NULL COMMENT '商品数量',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出库记录';
+
+-- ----------------------------
+-- Records of t_out_lib_log
 -- ----------------------------
 
 -- ----------------------------

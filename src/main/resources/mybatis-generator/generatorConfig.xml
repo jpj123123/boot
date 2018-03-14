@@ -41,21 +41,22 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <table domainObjectName="Customer" tableName="t_customer" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-        enableUpdateByExample="false"/>
+        <!--<table domainObjectName="Customer" tableName="t_customer" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+        enableUpdateByExample="false"/>-->
         <!--<table domainObjectName="TEnum" tableName="t_enum" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>-->
        <!-- <table domainObjectName="Goods" tableName="t_goods" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>-->
 <!--        <table domainObjectName="Order" tableName="t_order" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>-->
-        <table domainObjectName="Receipt" tableName="t_receipt" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+      <!--  <table domainObjectName="Receipt" tableName="t_receipt" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>-->
         <!--<table domainObjectName="Role" tableName="t_role" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
         <table domainObjectName="User" tableName="t_user" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
 -->
-
+        <table domainObjectName="OutLib" tableName="t_out_lib_log" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
     </context>
 </generatorConfiguration>
