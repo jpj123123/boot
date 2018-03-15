@@ -1,11 +1,14 @@
 package jpj.boot.service.impl;
 
+import jpj.boot.cache.UserCache;
 import jpj.boot.dao.OutLibMapper;
 import jpj.boot.entity.OutLib;
 import jpj.boot.entity.User;
 import jpj.boot.service.OutLibService;
+import jpj.boot.service.UserGoodsService;
 import jpj.boot.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -20,11 +23,14 @@ public class OutLibServiceImpl implements OutLibService{
     private OutLibMapper outLibMapper;
     @Resource
     private UserService userService;
+    @Resource
+    private UserGoodsService userGoodsService;
     @Override
     public int deleteByPrimaryKey(Long id) {
         return outLibMapper.deleteByPrimaryKey(id);
     }
 
+    @Transactional
     @Override
     public int insert(boolean isOut, Long goodsId, String goodsName, Long goodsCount, Long userId, Long createUserId, String remark) {
         OutLib outLib = new OutLib();
@@ -45,6 +51,9 @@ public class OutLibServiceImpl implements OutLibService{
         outLib.setRemark(remark);
         outLib.setCreateUserId(createUserId);
         outLib.setCreateTime(new Date());
+        if(UserCache.Contain(userId)){
+            userGoodsService.updateUserGoods(goodsId, userId, -goodsCount, 0L);
+        }
         return this.insert(outLib);
     }
 

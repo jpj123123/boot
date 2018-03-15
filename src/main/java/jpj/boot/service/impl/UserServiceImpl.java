@@ -1,5 +1,6 @@
 package jpj.boot.service.impl;
 
+import jpj.boot.cache.UserCache;
 import jpj.boot.dao.RoleMapper;
 import jpj.boot.dao.UserMapper;
 import jpj.boot.entity.Role;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,7 +38,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int insertSelective(User record) {
-        return userMapper.insertSelective(record);
+        Date current = new Date();
+        record.setCreateTime(current);
+        record.setUpdateTime(current);
+        int count = userMapper.insertSelective(record);
+
+        //更新缓存
+        UserCache.UPCACHE(record);
+        return count;
     }
 
     @Override
@@ -51,7 +60,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int updateByPrimaryKeySelective(User record) {
-        return userMapper.updateByPrimaryKeySelective(record);
+        record.setUpdateTime(new Date());
+        int count= userMapper.updateByPrimaryKeySelective(record);
+        //更新缓存
+        UserCache.UPCACHE(record);
+        return count;
     }
 
     @Override
@@ -76,6 +89,8 @@ public class UserServiceImpl implements UserService {
             return true;
         roleMapper.deleteUserRoleByUserId(id);
         HttpSessionUtil.clearLoginSessionByUserName(request.getSession(), user.getName());
+        //更新缓存
+        UserCache.UPCACHE(user);
         //软删除
         User upUser = new User();
         upUser.setId(id);
@@ -87,5 +102,10 @@ public class UserServiceImpl implements UserService {
         roleMapper.deleteUserRoleByUserId(userId);
         roleMapper.insertUserRole(userId, roleId);
         return true;
+    }
+
+    @Override
+    public List<User> listAllSaleUser() {
+        return userMapper.listAllSaleUser();
     }
 }

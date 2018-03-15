@@ -33,6 +33,10 @@
                 <label for="password">登录密码:</label>
                 <input class="easyui-validatebox" type="password" name="password" value="${user.password}" data-options="required:true"/>
             </div>
+            <div>
+                <label for="issale">是业务员:</label>
+                <input class="easyui-validatebox" type="checkbox" name="issale" <#if user.issale>checked</#if>/>
+            </div>
         </form>
     </div>
     <div region="south" border="false" style="text-align:right;padding:5px 0;">

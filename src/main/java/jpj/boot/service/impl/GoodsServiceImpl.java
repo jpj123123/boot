@@ -42,17 +42,6 @@ public class GoodsServiceImpl implements GoodsService {
         record.setCreateTime(current);
         int InsertCou = goodsMapper.insertSelective(record);
         if(record.getCount() > 0L){
-//            OutLib outLib = new OutLib();
-//            outLib.setGoodsId(record.getId());
-//            outLib.setGoodsName(record.getName());
-//            outLib.setGoodsCount(record.getCount());
-//            outLib.setUserId(userId);
-//            User user = userService.selectByPrimaryKey(userId);
-//            if(user != null){
-//                outLib.setUserName(user.getName());
-//            }
-//            outLib.setIsout(false);//入库
-//            outLib.setRemark("添加商品时添加的初始库存记录");
             outLibService.insert(false, record.getId(),record.getName(), record.getCount(), userId, userId, "添加商品时添加的初始库存记录");
         }
         return InsertCou;

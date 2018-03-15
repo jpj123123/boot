@@ -10,6 +10,7 @@
                 {title: '真是姓名', field: 'realName', width: 180},
                 {title: '联系电话', field: 'phone', width: 100},
                 {title: '住址', field: 'address', width: 180},
+                {title: '是业务员', field: 'issale', width: 180}
             ]],
             <#--//data:${enums},-->
             loadFilter:function(data){

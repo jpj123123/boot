@@ -56,7 +56,11 @@
         <table domainObjectName="User" tableName="t_user" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
 -->
-        <table domainObjectName="OutLib" tableName="t_out_lib_log" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+        <!--<table domainObjectName="OutLib" tableName="t_out_lib_log" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>-->
+        <table domainObjectName="UserGoods" tableName="t_user_goods" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+        <table domainObjectName="UserGoodsLog" tableName="t_user_goods_log" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
     </context>
 </generatorConfiguration>

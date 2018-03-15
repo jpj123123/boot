@@ -28,6 +28,10 @@
                 <label for="password">登录密码:</label>
                 <input class="easyui-validatebox" type="password" name="password" data-options="required:true"/>
             </div>
+            <div>
+                <label for="issale">是业务员:</label>
+                <input class="easyui-validatebox" type="checkbox" name="issale"/>
+            </div>
         </form>
     </div>
     <div region="south" border="false" style="text-align:right;padding:5px 0;">

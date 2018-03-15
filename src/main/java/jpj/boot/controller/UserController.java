@@ -160,8 +160,9 @@ public class UserController {
         insertUser.setName(dto.getName());
         insertUser.setPassword(dto.getPassword());
         insertUser.setPid(dto.getPid());
-        insertUser.setCreateTime(new Date());
-        insertUser.setUpdateTime(new Date());
+        insertUser.setIssale(dto.isIssale());
+
+
         return userService.insertSelective(insertUser) > 0;
     }
 
@@ -190,6 +191,7 @@ public class UserController {
         upUser.setPassword(dto.getPassword());
         upUser.setPid(dto.getPid());
         upUser.setId(dto.getId());
+        upUser.setIssale(dto.isIssale());
         return userService.updateByPrimaryKeySelective(upUser) > 0;
     }
 

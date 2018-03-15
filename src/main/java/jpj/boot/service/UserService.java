@@ -33,4 +33,6 @@ public interface UserService {
     boolean deleteUser(HttpServletRequest request, Long id);
 
     boolean insertUserRole(Long userId, Long roleId);
+
+    List<User> listAllSaleUser();
 }

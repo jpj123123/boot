@@ -18,6 +18,8 @@ public class User implements Serializable {
 
     private String address;
 
+    private Boolean issale;
+
     private Boolean isused;
 
     private Date createTime;
@@ -78,6 +80,14 @@ public class User implements Serializable {
 
     public void setAddress(String address) {
         this.address = address == null ? null : address.trim();
+    }
+
+    public Boolean getIssale() {
+        return issale;
+    }
+
+    public void setIssale(Boolean issale) {
+        this.issale = issale;
     }
 
     public Boolean getIsused() {

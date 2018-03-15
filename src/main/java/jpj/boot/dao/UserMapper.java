@@ -22,4 +22,6 @@ public interface UserMapper {
     int updateDelUser(User upUser);
 
     List<User> listUser();
+
+    List<User> listAllSaleUser();
 }

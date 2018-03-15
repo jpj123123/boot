@@ -1,6 +1,8 @@
 package jpj.boot.listener;
 
 import com.alibaba.fastjson.JSON;
+import jpj.boot.cache.UserCache;
+import jpj.boot.entity.User;
 import jpj.boot.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +13,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 启动初始化数据测试
@@ -26,9 +30,9 @@ public class InitListener implements InitializingBean, ApplicationContextAware {
     @Override
     public void afterPropertiesSet() throws Exception {
         //applicationContext.getBean()
-        log.info("initstart------------------------++++++++++++++++++++++");
-        log.info(userService.getClass().toString());
-        log.info(JSON.toJSONString(userService.selectByPrimaryKey(1L)));
+        log.info("初始化增加添加缓存");
+        List<User> users= userService.listAllSaleUser();
+        UserCache.CACHE_SALES = users.stream().collect(Collectors.toSet());
     }
 
     private ApplicationContext applicationContext;
