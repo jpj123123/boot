@@ -13,6 +13,8 @@ public class Goods {
 
     private Long price;
 
+    private Long count;
+
     private Boolean islist;
 
     private Boolean isused;
@@ -59,6 +61,14 @@ public class Goods {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public Long getCount() {
+        return count;
+    }
+
+    public void setCount(Long count) {
+        this.count = count;
     }
 
     public Boolean getIslist() {

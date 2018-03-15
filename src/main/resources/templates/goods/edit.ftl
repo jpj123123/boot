@@ -46,6 +46,10 @@
                 <input class="easyui-validatebox" type="text" name="price"  value="${goods.price?c}"/>分
             </div>
             <div>
+                <label>商品库存:</label>${goods.count?c}
+
+            </div>
+            <div>
                 <label for="islist">菜单类型:</label>
                 <label><input class="easyui-validatebox" type="radio" name="islist" value="0" <#if !goods.islist>checked</#if>/>下架</label>
                 <label><input class="easyui-validatebox" type="radio" name="islist" value="1" <#if goods.islist>checked</#if>/>上架</label>

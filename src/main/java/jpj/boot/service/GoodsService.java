@@ -14,7 +14,7 @@ public interface GoodsService {
 
     int insert(Goods record);
 
-    int insertSelective(Goods record);
+    int insertSelective(Long userId, Goods record);
 
     Goods selectByPrimaryKey(Long id);
 

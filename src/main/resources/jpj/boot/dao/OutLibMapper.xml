@@ -9,11 +9,13 @@
     <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
     <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
     <result column="goods_count" property="goodsCount" jdbcType="BIGINT" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, isout, user_id, user_name, goods_id, goods_name, goods_count, create_time, remark
+    id, isout, user_id, user_name, goods_id, goods_name, goods_count, create_user_id, 
+    create_time, remark
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -28,12 +30,12 @@
   <insert id="insert" parameterType="jpj.boot.entity.OutLib" >
     insert into t_out_lib_log (id, isout, user_id, 
       user_name, goods_id, goods_name, 
-      goods_count, create_time, remark
-      )
+      goods_count, create_user_id, create_time, 
+      remark)
     values (#{id,jdbcType=BIGINT}, #{isout,jdbcType=BIT}, #{userId,jdbcType=BIGINT}, 
       #{userName,jdbcType=VARCHAR}, #{goodsId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}, 
-      #{goodsCount,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
-      )
+      #{goodsCount,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="jpj.boot.entity.OutLib" >
     insert into t_out_lib_log
@@ -58,6 +60,9 @@
       </if>
       <if test="goodsCount != null" >
         goods_count,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -88,6 +93,9 @@
       <if test="goodsCount != null" >
         #{goodsCount,jdbcType=BIGINT},
       </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -117,6 +125,9 @@
       <if test="goodsCount != null" >
         goods_count = #{goodsCount,jdbcType=BIGINT},
       </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -134,6 +145,7 @@
       goods_id = #{goodsId,jdbcType=BIGINT},
       goods_name = #{goodsName,jdbcType=VARCHAR},
       goods_count = #{goodsCount,jdbcType=BIGINT},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}

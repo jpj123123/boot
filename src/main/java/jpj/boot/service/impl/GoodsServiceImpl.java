@@ -2,10 +2,16 @@ package jpj.boot.service.impl;
 
 import jpj.boot.dao.GoodsMapper;
 import jpj.boot.entity.Goods;
+import jpj.boot.entity.OutLib;
+import jpj.boot.entity.User;
 import jpj.boot.service.GoodsService;
+import jpj.boot.service.OutLibService;
+import jpj.boot.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +22,8 @@ import java.util.List;
 public class GoodsServiceImpl implements GoodsService {
     @Resource
     private GoodsMapper goodsMapper;
+    @Resource
+    private OutLibService outLibService;
     @Override
     public int deleteByPrimaryKey(Long id) {
         return goodsMapper.deleteByPrimaryKey(id);
@@ -27,8 +35,27 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public int insertSelective(Goods record) {
-        return goodsMapper.insertSelective(record);
+    @Transactional
+    public int insertSelective(Long userId,Goods record) {
+        Date current = new Date();
+        record.setUpdateTime(current);
+        record.setCreateTime(current);
+        int InsertCou = goodsMapper.insertSelective(record);
+        if(record.getCount() > 0L){
+//            OutLib outLib = new OutLib();
+//            outLib.setGoodsId(record.getId());
+//            outLib.setGoodsName(record.getName());
+//            outLib.setGoodsCount(record.getCount());
+//            outLib.setUserId(userId);
+//            User user = userService.selectByPrimaryKey(userId);
+//            if(user != null){
+//                outLib.setUserName(user.getName());
+//            }
+//            outLib.setIsout(false);//入库
+//            outLib.setRemark("添加商品时添加的初始库存记录");
+            outLibService.insert(false, record.getId(),record.getName(), record.getCount(), userId, userId, "添加商品时添加的初始库存记录");
+        }
+        return InsertCou;
     }
 
     @Override
@@ -38,11 +65,15 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public int updateByPrimaryKeySelective(Goods record) {
+        Date current = new Date();
+        record.setUpdateTime(current);
         return goodsMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(Goods record) {
+        Date current = new Date();
+        record.setUpdateTime(current);
         return goodsMapper.updateByPrimaryKey(record);
     }
 

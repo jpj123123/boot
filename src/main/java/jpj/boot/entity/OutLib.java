@@ -17,6 +17,8 @@ public class OutLib {
 
     private Long goodsCount;
 
+    private Long createUserId;
+
     private Date createTime;
 
     private String remark;
@@ -75,6 +77,14 @@ public class OutLib {
 
     public void setGoodsCount(Long goodsCount) {
         this.goodsCount = goodsCount;
+    }
+
+    public Long getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
     }
 
     public Date getCreateTime() {

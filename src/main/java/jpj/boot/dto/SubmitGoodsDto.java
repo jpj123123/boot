@@ -17,4 +17,5 @@ public class SubmitGoodsDto {
     private Boolean islist;
     private Long cost;//成本价
     private Long price;
+    private Long count;
 }

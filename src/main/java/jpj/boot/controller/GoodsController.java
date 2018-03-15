@@ -58,6 +58,9 @@ public class GoodsController {
     @RequestMapping("/addGoodsSubmit")
     public boolean addGoodsSubmit(HttpServletRequest request, SubmitGoodsDto dto) {
         BeanValidator.validator(dto);
+        if(dto.getCount() == null){
+            throw new BuisnessException("请填写初始库存！");
+        }
         Goods selGoods = goodsService.selectByCode(dto.getCode());
         if(selGoods != null){
             throw new BuisnessException("商品编号已存在，请修改后再提交");
@@ -71,10 +74,11 @@ public class GoodsController {
         goods.setCost(dto.getCost());
         goods.setPrice(dto.getPrice());
         goods.setIsused(true);
+        goods.setCount(dto.getCount());
         Date current = new Date();
         goods.setCreateTime(current);
         goods.setUpdateTime(current);
-        return goodsService.insertSelective(goods) > 0;
+        return goodsService.insertSelective(HttpSessionUtil.getUserId(request.getSession()), goods) > 0;
     }
 
     @RequestMapping("/edit")

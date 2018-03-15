@@ -9,6 +9,7 @@
                 {title: '商品名', field: 'name', width: 160},
                 {title: '成本价（单位分）', field: 'cost', width: 120},
                 {title: '单价（单位分）', field: 'price', width: 120},
+                {title: '库存', field: 'count', width: 120},
                 {title: '是否上架（ 1上架 0 下架）', field: 'islist', width: 180},
                 {title: '创建时间', field: 'createTime', width: 180}
             ]],

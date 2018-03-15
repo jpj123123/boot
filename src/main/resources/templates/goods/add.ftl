@@ -5,7 +5,7 @@
                 var json = eval("(" + data + ")")
                 if (json.code == 0) {
                     goods_datagrid_reloadFun();
-                    $('#goods-edit-layout').parent().window('close')
+                    $('#goods-add-layout').parent().window('close')
                     $.messager.show({
                         title:'提示',
                         msg:"添加成功",
@@ -45,7 +45,11 @@
                 <input class="easyui-validatebox" type="text" name="price"/>分
             </div>
             <div>
-                <label for="islist">菜单类型:</label>
+                <label for="price">初始库存:</label>
+                <input class="easyui-validatebox" type="text" name="count" data-options="required:true"/>
+            </div>
+            <div>
+                <label for="islist">商品上下架:</label>
                 <label><input class="easyui-validatebox" type="radio" name="islist" value="0"/>下架</label>
                 <label><input class="easyui-validatebox" type="radio" name="islist" value="1" checked/>上架</label>
             </div>
