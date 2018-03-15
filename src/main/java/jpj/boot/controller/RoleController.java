@@ -72,7 +72,7 @@ public class RoleController {
      * @return
      */
     @RequestMapping("/add")
-    public ModelAndView add(HttpServletRequest request,Integer pid) {
+    public ModelAndView add(HttpServletRequest request,Long pid) {
         ModelAndView mav = new ModelAndView("/role/add");
         if(pid == null || pid ==0){
             throw new BuisnessException("无选中节点！");
@@ -112,7 +112,7 @@ public class RoleController {
      */
     @ResponseBody
     @RequestMapping("/delete")
-    public boolean delete(HttpServletRequest request, Integer id) {
+    public boolean delete(HttpServletRequest request, Long id) {
         if (id == null || id == 0) {
             throw new BuisnessException("根节点无法删除！");
         }
@@ -125,7 +125,7 @@ public class RoleController {
      * @return
      */
     @RequestMapping("/addRoleEnum")
-    public ModelAndView addRoleEnum(HttpServletRequest request,Integer id) {
+    public ModelAndView addRoleEnum(HttpServletRequest request,Long id) {
         ModelAndView mav = new ModelAndView("/role/addRoleEnum");
         if(id == null || id == 0){
             throw new BuisnessException("无选中节点！");
@@ -148,7 +148,7 @@ public class RoleController {
      */
     @ResponseBody
     @RequestMapping("/addRoleEnumSubmit")
-    public boolean addRoleEnumSubmit(HttpServletRequest request, @RequestParam("roleId") Integer roleId, @RequestParam("enumIds") Integer[] enumIds) {
+    public boolean addRoleEnumSubmit(HttpServletRequest request, @RequestParam("roleId") Long roleId, @RequestParam("enumIds") Long[] enumIds) {
         return roleService.addRoleEnumSubmit(roleId,enumIds);
     }
 }

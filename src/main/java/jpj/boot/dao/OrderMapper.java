@@ -3,13 +3,13 @@ package jpj.boot.dao;
 import jpj.boot.entity.Order;
 
 public interface OrderMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Order record);
 
     int insertSelective(Order record);
 
-    Order selectByPrimaryKey(Integer id);
+    Order selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Order record);
 

@@ -10,9 +10,9 @@ import lombok.Data;
  */
 @Data
 public class SubmitUserDto {
-    private Integer id;
+    private Long id;
     @NotEmpty("上级id不能为空")
-    private Integer pid;
+    private Long pid;
     @NotEmpty("用户名不能为空")
     @IsRegex(value = "[0-9a-zA-Z_]{3,}",message = "用户名只能是数字、字母、_且长度要大于3位")
     private String name;

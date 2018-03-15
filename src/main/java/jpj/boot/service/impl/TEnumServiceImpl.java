@@ -26,7 +26,7 @@ public class TEnumServiceImpl implements TEnumService {
     private TEnumMapper tEnumMapper;
 
     @Override
-    public int deleteByPrimaryKey(Integer id) {
+    public int deleteByPrimaryKey(Long id) {
         tEnumMapper.deleteRoleEnumByEnumId(id);
         return tEnumMapper.deleteByPrimaryKey(id);
     }
@@ -42,7 +42,7 @@ public class TEnumServiceImpl implements TEnumService {
     }
 
     @Override
-    public TEnum selectByPrimaryKey(Integer id) {
+    public TEnum selectByPrimaryKey(Long id) {
         return tEnumMapper.selectByPrimaryKey(id);
     }
 
@@ -62,7 +62,7 @@ public class TEnumServiceImpl implements TEnumService {
     }
 
     @Override
-    public List<TEnum> listByPid(Integer pid) {
+    public List<TEnum> listByPid(Long pid) {
         List<TEnum> lists = tEnumMapper.listByPid(pid);
 
         lists.stream().filter(enumDto -> enumDto.getType() != 3).forEach(enumDto -> {
@@ -75,7 +75,7 @@ public class TEnumServiceImpl implements TEnumService {
     }
 
     @Override
-    public List<EnumDto> listChildByPidAndRoleId(Integer pid, Integer roleId) {
+    public List<EnumDto> listChildByPidAndRoleId(Long pid, Long roleId) {
         List<EnumDto> lists = tEnumMapper.listChildByPidAndRoleId(pid, roleId);
 
         lists.stream().forEach(enumDto -> {
@@ -85,7 +85,7 @@ public class TEnumServiceImpl implements TEnumService {
             enumDto.setAttributes(map);
             enumDto.setState("close");
             if (enumDto.getType() == 1) {
-                //Integer count = tEnumMapper.countChildByPidAndRoleId(enumDto.getPid(), roleId);
+                //Long count = tEnumMapper.countChildByPidAndRoleId(enumDto.getPid(), roleId);
                 TEnum tEnum = this.selectByCode(enumDto.getId());
                 enumDto.setChildren(this.listChildByPidAndRoleId(tEnum.getId(), roleId));
             }
@@ -94,7 +94,7 @@ public class TEnumServiceImpl implements TEnumService {
     }
 
     @Override
-    public List<EnumDto> listEnumDtoAllByPid(Integer pid, Integer roleId) {
+    public List<EnumDto> listEnumDtoAllByPid(Long pid, Long roleId) {
         List<EnumDto> lists = null;
         if (roleId == 0) {
             lists = tEnumMapper.listEnumDtoAllByPid(pid);
@@ -135,7 +135,7 @@ public class TEnumServiceImpl implements TEnumService {
 
     @Transactional
     @Override
-    public boolean deleteEnum(Integer id, Byte type) {
+    public boolean deleteEnum(Long id, Byte type) {
         if (type != 3) {
             List<TEnum> tEnums = listByPid(id);
             for (TEnum tEnum : tEnums)

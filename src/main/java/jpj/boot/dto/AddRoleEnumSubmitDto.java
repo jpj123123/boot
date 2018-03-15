@@ -12,6 +12,6 @@ import java.util.List;
 @Data
 public class AddRoleEnumSubmitDto {
     @NotEmpty("缺少角色Id")
-    private Integer roleId;
-    private List<Integer> enums;
+    private Long roleId;
+    private List<Long> enums;
 }

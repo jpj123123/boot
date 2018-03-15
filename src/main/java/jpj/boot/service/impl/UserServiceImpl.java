@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     private RoleMapper roleMapper;
 
     @Override
-    public int deleteByPrimaryKey(Integer id) {
+    public int deleteByPrimaryKey(Long id) {
         return userMapper.deleteByPrimaryKey(id);
     }
 
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User selectByPrimaryKey(Integer id) {
+    public User selectByPrimaryKey(Long id) {
         return userMapper.selectByPrimaryKey(id);
     }
 
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Role selectRoleByUserId(Integer id) {
+    public Role selectRoleByUserId(Long id) {
         return roleMapper.selectRoleByUserId(id);
     }
 
@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteUser(HttpServletRequest request, Integer id) {
+    public boolean deleteUser(HttpServletRequest request, Long id) {
         User user = selectByPrimaryKey(id);
         if(user == null)
             return true;
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
     }
     @Transactional
     @Override
-    public boolean insertUserRole(Integer userId, Integer roleId) {
+    public boolean insertUserRole(Long userId, Long roleId) {
         roleMapper.deleteUserRoleByUserId(userId);
         roleMapper.insertUserRole(userId, roleId);
         return true;

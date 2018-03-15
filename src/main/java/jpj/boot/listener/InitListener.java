@@ -28,7 +28,7 @@ public class InitListener implements InitializingBean, ApplicationContextAware {
         //applicationContext.getBean()
         log.info("initstart------------------------++++++++++++++++++++++");
         log.info(userService.getClass().toString());
-        log.info(JSON.toJSONString(userService.selectByPrimaryKey(1)));
+        log.info(JSON.toJSONString(userService.selectByPrimaryKey(1L)));
     }
 
     private ApplicationContext applicationContext;

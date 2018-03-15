@@ -24,17 +24,17 @@ public class HttpSessionUtil {
             session.removeAttribute(sessionId);
         }
     }
-    public static Integer getUserId(HttpSession session){
+    public static Long getUserId(HttpSession session){
         if(session == null){
-            return 0;
+            return 0L;
         }
         //清除session
         String sessionId  = session.getId();
         String userName = (String)session.getAttribute(sessionId);
         if(StringUtils.isNotBlank(userName)){
-            return (Integer)session.getAttribute(userName);
+            return (Long)session.getAttribute(userName);
         }
-        return 0;
+        return 0L;
     }
     /**
      * 清除登陆信息

@@ -17,7 +17,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Resource
     private GoodsMapper goodsMapper;
     @Override
-    public int deleteByPrimaryKey(Integer id) {
+    public int deleteByPrimaryKey(Long id) {
         return goodsMapper.deleteByPrimaryKey(id);
     }
 
@@ -32,7 +32,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public Goods selectByPrimaryKey(Integer id) {
+    public Goods selectByPrimaryKey(Long id) {
         return goodsMapper.selectByPrimaryKey(id);
     }
 
@@ -57,7 +57,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public int deleteGoodsByPrimaryKey(Integer id) {
+    public int deleteGoodsByPrimaryKey(Long id) {
         return goodsMapper.deleteGoodsByPrimaryKey(id);
     }
 }

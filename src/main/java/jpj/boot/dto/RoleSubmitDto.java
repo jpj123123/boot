@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class RoleSubmitDto {
     @NotEmpty("上级id不能为空")
-    private Integer pid;
+    private Long pid;
     @NotEmpty("角色名不能为空")
     private String name;
 }

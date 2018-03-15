@@ -7,29 +7,29 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface TEnumMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(TEnum record);
 
     int insertSelective(TEnum record);
 
-    TEnum selectByPrimaryKey(Integer id);
+    TEnum selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(TEnum record);
 
     int updateByPrimaryKey(TEnum record);
 
-    List<EnumDto> listChildByPidAndRoleId(@Param("pid") Integer pid, @Param("roleId") Integer roleId);
+    List<EnumDto> listChildByPidAndRoleId(@Param("pid") Long pid, @Param("roleId") Long roleId);
 
-    Integer countChildByPidAndRoleId(@Param("pid") Integer pid, @Param("roleId") Integer roleId);
+    Integer countChildByPidAndRoleId(@Param("pid") Long pid, @Param("roleId") Long roleId);
 
-    List<TEnum> listByPid(Integer pid);
+    List<TEnum> listByPid(Long pid);
 
-    Integer countByPid(Integer pid);
+    Integer countByPid(Long pid);
 
     TEnum selectByCode(String code);
 
-    int deleteRoleEnumByEnumId(Integer enumId);
+    int deleteRoleEnumByEnumId(Long enumId);
 
-    List<EnumDto> listEnumDtoAllByPid(Integer pid);
+    List<EnumDto> listEnumDtoAllByPid(Long pid);
 }

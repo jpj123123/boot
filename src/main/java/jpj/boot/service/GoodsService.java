@@ -10,13 +10,13 @@ import java.util.List;
  */
 public interface GoodsService {
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Goods record);
 
     int insertSelective(Goods record);
 
-    Goods selectByPrimaryKey(Integer id);
+    Goods selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Goods record);
 
@@ -26,5 +26,5 @@ public interface GoodsService {
 
     Goods selectByCode(String code);
 
-    int deleteGoodsByPrimaryKey(Integer id);
+    int deleteGoodsByPrimaryKey(Long id);
 }

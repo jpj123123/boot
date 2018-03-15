@@ -9,12 +9,12 @@ import lombok.Data;
  */
 @Data
 public class SubmitGoodsDto {
-    private Integer id;
+    private Long id;
     @NotEmpty("商品名字不能为空")
     private String name;
     @NotEmpty("商品编码不能为空")
     private String code;
     private Boolean islist;
-    private Integer cost;//成本价
-    private Integer price;
+    private Long cost;//成本价
+    private Long price;
 }

@@ -3,13 +3,13 @@ package jpj.boot.dao;
 import jpj.boot.entity.Receipt;
 
 public interface ReceiptMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Receipt record);
 
     int insertSelective(Receipt record);
 
-    Receipt selectByPrimaryKey(Integer id);
+    Receipt selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Receipt record);
 

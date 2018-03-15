@@ -53,8 +53,8 @@ public class MyFiler implements Filter {
         if (!config.getIgnoreLoginUrlList().contains(request.getRequestURI())) {
             //获取登录姓名
             String name = (String) request.getSession().getAttribute(request.getSession().getId());
-            Integer id = (Integer) request.getSession().getAttribute(name);
-            if (StringUtils.isEmpty(name) || id == null || id == 0) {
+            Long id = (Long) request.getSession().getAttribute(name);
+            if (StringUtils.isEmpty(name) || id == null || Long.valueOf(0L).equals(id)) {
                 response.sendRedirect("/login");
                 return;
             }

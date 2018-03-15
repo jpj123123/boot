@@ -3,15 +3,15 @@ package jpj.boot.entity;
 import java.util.Date;
 
 public class Goods {
-    private Integer id;
+    private Long id;
 
     private String code;
 
     private String name;
 
-    private Integer cost;
+    private Long cost;
 
-    private Integer price;
+    private Long price;
 
     private Boolean islist;
 
@@ -21,11 +21,11 @@ public class Goods {
 
     private Date updateTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -45,19 +45,19 @@ public class Goods {
         this.name = name == null ? null : name.trim();
     }
 
-    public Integer getCost() {
+    public Long getCost() {
         return cost;
     }
 
-    public void setCost(Integer cost) {
+    public void setCost(Long cost) {
         this.cost = cost;
     }
 
-    public Integer getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 

@@ -73,7 +73,7 @@ public class Example {
     public ModelAndView index(HttpServletRequest request, User user) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("userName", user.getName());
-        Integer id = (Integer) request.getSession().getAttribute(user.getName());
+        Long id = HttpSessionUtil.getUserId(request.getSession());
         log.info("-------index----" + user.getName()+"---id---"+ id);
         mav.setViewName("index");
         return mav;  //"Hello World!";

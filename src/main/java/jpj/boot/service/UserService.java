@@ -12,13 +12,13 @@ import java.util.List;
  * @Date：creste in 2018/2/8
  */
 public interface UserService {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(User record);
 
     int insertSelective(User record);
 
-    User selectByPrimaryKey(Integer id);
+    User selectByPrimaryKey(Long id);
 
     User selectByUserName(String userName);
 
@@ -26,11 +26,11 @@ public interface UserService {
 
     int updateByPrimaryKey(User record);
 
-    Role selectRoleByUserId(Integer id);
+    Role selectRoleByUserId(Long id);
 
     List<User> listUser();
 
-    boolean deleteUser(HttpServletRequest request, Integer id);
+    boolean deleteUser(HttpServletRequest request, Long id);
 
-    boolean insertUserRole(Integer userId, Integer roleId);
+    boolean insertUserRole(Long userId, Long roleId);
 }

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jpj.boot.dao.RoleMapper" >
   <resultMap id="BaseResultMap" type="jpj.boot.entity.Role" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="pid" property="pid" jdbcType="INTEGER" />
-    <result column="userId" property="userId" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pid" property="pid" jdbcType="BIGINT" />
+    <result column="userId" property="userId" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -13,47 +13,47 @@
   <sql id="User_Role_Column_List" >
     tr.id, tr.pid, tr.name,tur.user_id userId
   </sql>
-  <select id="selectRoleByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectRoleByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="User_Role_Column_List" />
     from t_user_role tur
     LEFT JOIN t_role tr
     ON tur.role_id = tr.id
-    where tur.user_id = #{userId,jdbcType=INTEGER}
+    where tur.user_id = #{userId,jdbcType=BIGINT}
   </select>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
     select
     <include refid="Base_Column_List" />
     from t_role
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="listAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  <select id="listAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from t_role
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_role
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <delete id="deleteRoleEnumByRoleId" parameterType="java.lang.Integer" >
+  <delete id="deleteRoleEnumByRoleId" parameterType="java.lang.Long" >
     delete from t_role_enum
-    where role_id = #{roleId,jdbcType=INTEGER}
+    where role_id = #{roleId,jdbcType=BIGINT}
   </delete>
 
-  <delete id="deleteUserRoleByUserId" parameterType="java.lang.Integer" >
+  <delete id="deleteUserRoleByUserId" parameterType="java.lang.Long" >
     delete from t_user_role
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=BIGINT}
   </delete>
 
   <insert id="insert" parameterType="jpj.boot.entity.Role" >
     insert into t_role (id, pid, name
       )
-    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}
+    values (#{id,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertRoleEnums" >
@@ -66,7 +66,7 @@
   </insert>
   <insert id="insertUserRole" >
     insert into t_user_role (user_id, role_id)
-    values (#{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}
+    values (#{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}
     )
   </insert>
   <insert id="insertSelective" parameterType="jpj.boot.entity.Role" >
@@ -84,10 +84,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=BIGINT},
       </if>
       <if test="pid != null" >
-        #{pid,jdbcType=INTEGER},
+        #{pid,jdbcType=BIGINT},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -98,18 +98,18 @@
     update t_role
     <set >
       <if test="pid != null" >
-        pid = #{pid,jdbcType=INTEGER},
+        pid = #{pid,jdbcType=BIGINT},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="jpj.boot.entity.Role" >
     update t_role
-    set pid = #{pid,jdbcType=INTEGER},
+    set pid = #{pid,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

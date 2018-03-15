@@ -6,13 +6,13 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 public interface CustomerMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Customer record);
 
     int insertSelective(Customer record);
 
-    Customer selectByPrimaryKey(Integer id);
+    Customer selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Customer record);
 
@@ -22,5 +22,5 @@ public interface CustomerMapper {
 
     Customer selectByPhone(String phone);
 
-    int deleteCustomerByPrimaryKey(Integer id);
+    int deleteCustomerByPrimaryKey(Long id);
 }

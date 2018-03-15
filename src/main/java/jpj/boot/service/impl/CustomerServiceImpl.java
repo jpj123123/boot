@@ -18,7 +18,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Resource
     private CustomerMapper customerMapper;
     @Override
-    public int deleteByPrimaryKey(Integer id) {
+    public int deleteByPrimaryKey(Long id) {
         return customerMapper.deleteByPrimaryKey(id);
     }
 
@@ -33,7 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer selectByPrimaryKey(Integer id) {
+    public Customer selectByPrimaryKey(Long id) {
         return customerMapper.selectByPrimaryKey(id);
     }
 
@@ -58,7 +58,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public int deleteCustomerByPrimaryKey(Integer id) {
+    public int deleteCustomerByPrimaryKey(Long id) {
         return customerMapper.deleteCustomerByPrimaryKey(id);
     }
 }

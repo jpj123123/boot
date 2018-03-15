@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jpj.boot.dao.OrderMapper" >
   <resultMap id="BaseResultMap" type="jpj.boot.entity.Order" >
-    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="BIGINT" />
     <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
-    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
-    <result column="count" property="count" jdbcType="INTEGER" />
-    <result column="price" property="price" jdbcType="INTEGER" />
-    <result column="total_price" property="totalPrice" jdbcType="INTEGER" />
-    <result column="pay_money" property="payMoney" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="count" property="count" jdbcType="BIGINT" />
+    <result column="price" property="price" jdbcType="BIGINT" />
+    <result column="total_price" property="totalPrice" jdbcType="BIGINT" />
+    <result column="pay_money" property="payMoney" jdbcType="BIGINT" />
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
@@ -19,15 +19,15 @@
     id, order_no, goods_id, user_id, customer_id, count, price, total_price, pay_money, 
     status, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from t_order
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_order
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="jpj.boot.entity.Order" >
     insert into t_order (id, order_no, goods_id, 
@@ -35,9 +35,9 @@
       price, total_price, pay_money, 
       status, create_time, update_time
       )
-    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, 
-      #{userId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}, 
-      #{price,jdbcType=INTEGER}, #{totalPrice,jdbcType=INTEGER}, #{payMoney,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, #{goodsId,jdbcType=BIGINT}, 
+      #{userId,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, #{count,jdbcType=BIGINT}, 
+      #{price,jdbcType=BIGINT}, #{totalPrice,jdbcType=BIGINT}, #{payMoney,jdbcType=BIGINT}, 
       #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -83,31 +83,31 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=BIGINT},
       </if>
       <if test="orderNo != null" >
         #{orderNo,jdbcType=VARCHAR},
       </if>
       <if test="goodsId != null" >
-        #{goodsId,jdbcType=INTEGER},
+        #{goodsId,jdbcType=BIGINT},
       </if>
       <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=BIGINT},
       </if>
       <if test="customerId != null" >
-        #{customerId,jdbcType=INTEGER},
+        #{customerId,jdbcType=BIGINT},
       </if>
       <if test="count != null" >
-        #{count,jdbcType=INTEGER},
+        #{count,jdbcType=BIGINT},
       </if>
       <if test="price != null" >
-        #{price,jdbcType=INTEGER},
+        #{price,jdbcType=BIGINT},
       </if>
       <if test="totalPrice != null" >
-        #{totalPrice,jdbcType=INTEGER},
+        #{totalPrice,jdbcType=BIGINT},
       </if>
       <if test="payMoney != null" >
-        #{payMoney,jdbcType=INTEGER},
+        #{payMoney,jdbcType=BIGINT},
       </if>
       <if test="status != null" >
         #{status,jdbcType=TINYINT},
@@ -127,25 +127,25 @@
         order_no = #{orderNo,jdbcType=VARCHAR},
       </if>
       <if test="goodsId != null" >
-        goods_id = #{goodsId,jdbcType=INTEGER},
+        goods_id = #{goodsId,jdbcType=BIGINT},
       </if>
       <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
       <if test="customerId != null" >
-        customer_id = #{customerId,jdbcType=INTEGER},
+        customer_id = #{customerId,jdbcType=BIGINT},
       </if>
       <if test="count != null" >
-        count = #{count,jdbcType=INTEGER},
+        count = #{count,jdbcType=BIGINT},
       </if>
       <if test="price != null" >
-        price = #{price,jdbcType=INTEGER},
+        price = #{price,jdbcType=BIGINT},
       </if>
       <if test="totalPrice != null" >
-        total_price = #{totalPrice,jdbcType=INTEGER},
+        total_price = #{totalPrice,jdbcType=BIGINT},
       </if>
       <if test="payMoney != null" >
-        pay_money = #{payMoney,jdbcType=INTEGER},
+        pay_money = #{payMoney,jdbcType=BIGINT},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=TINYINT},
@@ -157,21 +157,21 @@
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="jpj.boot.entity.Order" >
     update t_order
     set order_no = #{orderNo,jdbcType=VARCHAR},
-      goods_id = #{goodsId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
-      customer_id = #{customerId,jdbcType=INTEGER},
-      count = #{count,jdbcType=INTEGER},
-      price = #{price,jdbcType=INTEGER},
-      total_price = #{totalPrice,jdbcType=INTEGER},
-      pay_money = #{payMoney,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      customer_id = #{customerId,jdbcType=BIGINT},
+      count = #{count,jdbcType=BIGINT},
+      price = #{price,jdbcType=BIGINT},
+      total_price = #{totalPrice,jdbcType=BIGINT},
+      pay_money = #{payMoney,jdbcType=BIGINT},
       status = #{status,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

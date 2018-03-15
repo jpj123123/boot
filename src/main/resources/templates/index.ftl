@@ -29,7 +29,7 @@
             });
         });
         function addEnum(node) {
-
+            $('#enum_tree').tree("toggle",$('#enum_tree').tree('getSelected').target);
         }
         function addLink(node) {
             var panelCenter = $("#root-layout").layout("panel","center");

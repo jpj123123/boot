@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 public class SubmitCustomerDto {
-    private Integer id;
+    private Long id;
     @NotEmpty("客户名不能为空")
     private String name;
     @NotEmpty("客户电话不能为空")
@@ -17,6 +17,6 @@ public class SubmitCustomerDto {
     @NotEmpty("客户地址不能为空")
     private String address;
     @NotEmpty("客户余额不能为空")
-    private Integer money;
-    private Integer userId;
+    private Long money;
+    private Long userId;
 }

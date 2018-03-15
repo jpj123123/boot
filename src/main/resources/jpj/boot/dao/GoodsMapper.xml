@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jpj.boot.dao.GoodsMapper" >
   <resultMap id="BaseResultMap" type="jpj.boot.entity.Goods" >
-    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="BIGINT" />
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="cost" property="cost" jdbcType="INTEGER" />
-    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="cost" property="cost" jdbcType="BIGINT" />
+    <result column="price" property="price" jdbcType="BIGINT" />
     <result column="islist" property="islist" jdbcType="BIT" />
     <result column="isused" property="isused" jdbcType="BIT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -15,11 +15,11 @@
   <sql id="Base_Column_List" >
     id, code, name, cost, price, islist, isused, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from t_goods
-    where id = #{id,jdbcType=INTEGER} AND isused=1
+    where id = #{id,jdbcType=BIGINT} AND isused=1
   </select>
 
   <select id="selectByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -36,16 +36,16 @@
     WHERE isused=1
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_goods
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="jpj.boot.entity.Goods" >
     insert into t_goods (id, code, name, 
       cost, price, islist, isused, 
       create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{cost,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{islist,jdbcType=BIT}, #{isused,jdbcType=BIT}, 
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{cost,jdbcType=BIGINT}, #{price,jdbcType=BIGINT}, #{islist,jdbcType=BIT}, #{isused,jdbcType=BIT}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="jpj.boot.entity.Goods" >
@@ -81,7 +81,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=BIGINT},
       </if>
       <if test="code != null" >
         #{code,jdbcType=VARCHAR},
@@ -90,10 +90,10 @@
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="cost != null" >
-        #{cost,jdbcType=INTEGER},
+        #{cost,jdbcType=BIGINT},
       </if>
       <if test="price != null" >
-        #{price,jdbcType=INTEGER},
+        #{price,jdbcType=BIGINT},
       </if>
       <if test="islist != null" >
         #{islist,jdbcType=BIT},
@@ -119,10 +119,10 @@
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="cost != null" >
-        cost = #{cost,jdbcType=INTEGER},
+        cost = #{cost,jdbcType=BIGINT},
       </if>
       <if test="price != null" >
-        price = #{price,jdbcType=INTEGER},
+        price = #{price,jdbcType=BIGINT},
       </if>
       <if test="islist != null" >
         islist = #{islist,jdbcType=BIT},
@@ -137,24 +137,24 @@
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="jpj.boot.entity.Goods" >
     update t_goods
     set code = #{code,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
-      cost = #{cost,jdbcType=INTEGER},
-      price = #{price,jdbcType=INTEGER},
+      cost = #{cost,jdbcType=BIGINT},
+      price = #{price,jdbcType=BIGINT},
       islist = #{islist,jdbcType=BIT},
       isused = #{isused,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="deleteGoodsByPrimaryKey" parameterType="java.lang.Integer" >
+  <update id="deleteGoodsByPrimaryKey" parameterType="java.lang.Long" >
     update t_goods
     isused = 0,
     update_time = NOW()
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

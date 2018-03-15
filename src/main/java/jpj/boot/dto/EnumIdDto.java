@@ -9,5 +9,5 @@ import lombok.Data;
 @Data
 public class EnumIdDto {
     //菜单按钮id
-    private Integer id;
+    private Long id;
 }

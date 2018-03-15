@@ -21,7 +21,7 @@ public class RoleServiceImpl implements RoleService {
     private RoleMapper roleMapper;
 
     @Override
-    public int deleteByPrimaryKey(Integer id) {
+    public int deleteByPrimaryKey(Long id) {
         return roleMapper.deleteByPrimaryKey(id);
     }
 
@@ -36,7 +36,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role selectByPrimaryKey(Integer id) {
+    public Role selectByPrimaryKey(Long id) {
         return roleMapper.selectByPrimaryKey(id);
     }
 
@@ -51,7 +51,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role selectRoleByUserId(Integer id) {
+    public Role selectRoleByUserId(Long id) {
         return roleMapper.selectRoleByUserId(id);
     }
 
@@ -61,7 +61,7 @@ public class RoleServiceImpl implements RoleService {
     }
     @Transactional
     @Override
-    public boolean addRoleEnumSubmit(Integer roleId, Integer[] enumIds) {
+    public boolean addRoleEnumSubmit(Long roleId, Long[] enumIds) {
         roleMapper.deleteRoleEnumByRoleId(roleId);
         roleMapper.insertRoleEnums(roleId, enumIds);
         return true;

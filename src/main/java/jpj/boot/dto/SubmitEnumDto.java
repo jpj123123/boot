@@ -9,9 +9,9 @@ import lombok.Data;
  */
 @Data
 public class SubmitEnumDto {
-    private Integer id;
+    private Long id;
     @NotEmpty("上级id不能为空")
-    private Integer pid;
+    private Long pid;
     @NotEmpty("菜单名不能为空")
     private String name;
     @NotEmpty("菜单编号不能为空")

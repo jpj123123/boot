@@ -136,7 +136,7 @@ public class UserController {
     }
 
     @RequestMapping("/add")
-    public ModelAndView add(Integer pid) {
+    public ModelAndView add(Long pid) {
         ModelAndView mav = new ModelAndView("user/add");
         User user = userService.selectByPrimaryKey(pid);
         if (user == null) {
@@ -166,7 +166,7 @@ public class UserController {
     }
 
     @RequestMapping("/edit")
-    public ModelAndView edit(HttpServletRequest request, Integer id) {
+    public ModelAndView edit(HttpServletRequest request, Long id) {
         ModelAndView mav = new ModelAndView("user/edit");
         User user = userService.selectByPrimaryKey(id);
         mav.addObject("user", user);
@@ -195,13 +195,13 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/delete")
-    public boolean delete(HttpServletRequest request, Integer id) {
+    public boolean delete(HttpServletRequest request, Long id) {
         logger.info("userId:" + HttpSessionUtil.getUserId(request.getSession()) + "新增用户id：" + id);
         return userService.deleteUser(request, id);
     }
 
     @RequestMapping("/addUserRole")
-    public ModelAndView addUserRole(HttpServletRequest request, Integer id) {
+    public ModelAndView addUserRole(HttpServletRequest request, Long id) {
         ModelAndView mav = new ModelAndView("user/addUserRole");
         User user = userService.selectByPrimaryKey(id);
         Role role = roleService.selectRoleByUserId(id);
@@ -216,7 +216,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/addUserRoleSubmit")
-    public boolean addUserRoleSubmit(HttpServletRequest request, @RequestParam("userId") Integer userId, @RequestParam("roleId") Integer roleId) {
+    public boolean addUserRoleSubmit(HttpServletRequest request, @RequestParam("userId") Long userId, @RequestParam("roleId") Long roleId) {
         User user = userService.selectByPrimaryKey(userId);
         if (user == null)
             throw new BuisnessException("用户不存在！");

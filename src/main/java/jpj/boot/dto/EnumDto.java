@@ -11,8 +11,8 @@ import java.util.Map;
  */
 @Data
 public class EnumDto {
-    private Integer pid;
-    private String id;
+    private Long pid;
+    private String id; //code
     private String text;
     private String state;
     private Map<String,Object> attributes;

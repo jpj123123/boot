@@ -3,13 +3,13 @@ package jpj.boot.entity;
 import java.util.Date;
 
 public class Receipt {
-    private Integer id;
+    private Long id;
 
-    private Integer orderId;
+    private Long orderId;
 
-    private Integer money;
+    private Long money;
 
-    private Integer userId;
+    private Long userId;
 
     private String remark;
 
@@ -17,35 +17,35 @@ public class Receipt {
 
     private Date updateTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
-    public Integer getMoney() {
+    public Long getMoney() {
         return money;
     }
 
-    public void setMoney(Integer money) {
+    public void setMoney(Long money) {
         this.money = money;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

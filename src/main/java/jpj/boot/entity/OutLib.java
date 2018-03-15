@@ -3,29 +3,29 @@ package jpj.boot.entity;
 import java.util.Date;
 
 public class OutLib {
-    private Integer id;
+    private Long id;
 
     private Boolean isout;
 
-    private Integer userId;
+    private Long userId;
 
     private String userName;
 
-    private Integer goodsId;
+    private Long goodsId;
 
     private String goodsName;
 
-    private Integer goodsCount;
+    private Long goodsCount;
 
     private Date createTime;
 
     private String remark;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -37,11 +37,11 @@ public class OutLib {
         this.isout = isout;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -53,11 +53,11 @@ public class OutLib {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    public Integer getGoodsId() {
+    public Long getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(Integer goodsId) {
+    public void setGoodsId(Long goodsId) {
         this.goodsId = goodsId;
     }
 
@@ -69,11 +69,11 @@ public class OutLib {
         this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 
-    public Integer getGoodsCount() {
+    public Long getGoodsCount() {
         return goodsCount;
     }
 
-    public void setGoodsCount(Integer goodsCount) {
+    public void setGoodsCount(Long goodsCount) {
         this.goodsCount = goodsCount;
     }
 

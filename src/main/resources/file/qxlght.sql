@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50638
 File Encoding         : 65001
 
-Date: 2018-03-14 23:22:37
+Date: 2018-03-15 10:12:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,13 +20,13 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `t_customer`;
 CREATE TABLE `t_customer` (
-  `id` int(15) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(15) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '客户名',
   `password` varchar(40) DEFAULT NULL COMMENT '密码：暂时没有',
   `phone` varchar(15) NOT NULL COMMENT '手机号',
   `address` varchar(255) DEFAULT NULL COMMENT '地址',
-  `money` int(15) NOT NULL COMMENT '账户余额',
-  `user_id` int(15) DEFAULT NULL COMMENT '所属用户',
+  `money` bigint(15) NOT NULL COMMENT '账户余额',
+  `user_id` bigint(15) DEFAULT NULL COMMENT '所属用户',
   `isdelete` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否有效用户0 有效1 无效',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='客户表';
@@ -43,8 +43,8 @@ INSERT INTO `t_customer` VALUES ('3', '李四', null, '15814210036', '杞县县�
 -- ----------------------------
 DROP TABLE IF EXISTS `t_enum`;
 CREATE TABLE `t_enum` (
-  `id` int(15) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `pid` int(15) unsigned NOT NULL DEFAULT '0' COMMENT '父id',
+  `id` bigint(15) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `pid` bigint(15) unsigned NOT NULL DEFAULT '0' COMMENT '父id',
   `code` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `icons` varchar(50) DEFAULT NULL,
@@ -91,12 +91,12 @@ INSERT INTO `t_enum` VALUES ('29', '25', 'goods_delete', '删除', 'icon-remove'
 -- ----------------------------
 DROP TABLE IF EXISTS `t_goods`;
 CREATE TABLE `t_goods` (
-  `id` int(15) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(15) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(255) NOT NULL COMMENT '商品编码',
   `name` varchar(255) NOT NULL COMMENT '商品名称',
-  `cost` int(15) DEFAULT NULL COMMENT '进价：单位（分）',
-  `price` int(15) DEFAULT NULL,
-  `count` int(15) unsigned NOT NULL DEFAULT '0' COMMENT '库存',
+  `cost` bigint(15) DEFAULT NULL COMMENT '进价：单位（分）',
+  `price` bigint(15) DEFAULT NULL,
+  `count` bigint(15) unsigned NOT NULL DEFAULT '0' COMMENT '库存',
   `islist` tinyint(1) DEFAULT '1' COMMENT '是否上架 1上架 0 下架',
   `isused` tinyint(1) DEFAULT '1' COMMENT '是否有效 1有效 0无效',
   `create_time` timestamp NULL DEFAULT NULL,
@@ -114,15 +114,15 @@ INSERT INTO `t_goods` VALUES ('1', 'yangyuan', '养元六个核桃', '5200', '62
 -- ----------------------------
 DROP TABLE IF EXISTS `t_order`;
 CREATE TABLE `t_order` (
-  `id` int(15) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(15) unsigned NOT NULL AUTO_INCREMENT,
   `order_no` varchar(40) NOT NULL COMMENT '订单号',
-  `goods_id` int(15) NOT NULL,
-  `user_id` int(15) NOT NULL,
-  `customer_id` int(15) NOT NULL,
-  `count` int(15) NOT NULL COMMENT '购买数量',
-  `price` int(15) NOT NULL COMMENT '价格',
-  `total_price` int(15) NOT NULL COMMENT '商品总价应收款',
-  `pay_money` int(15) NOT NULL DEFAULT '0' COMMENT '支付金额',
+  `goods_id` bigint(15) NOT NULL,
+  `user_id` bigint(15) NOT NULL,
+  `customer_id` bigint(15) NOT NULL,
+  `count` bigint(15) NOT NULL COMMENT '购买数量',
+  `price` bigint(15) NOT NULL COMMENT '价格',
+  `total_price` bigint(15) NOT NULL COMMENT '商品总价应收款',
+  `pay_money` bigint(15) NOT NULL DEFAULT '0' COMMENT '支付金额',
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '订单状态0未付款1部分付款2全部付款',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
@@ -138,13 +138,13 @@ CREATE TABLE `t_order` (
 -- ----------------------------
 DROP TABLE IF EXISTS `t_out_lib_log`;
 CREATE TABLE `t_out_lib_log` (
-  `id` int(15) NOT NULL AUTO_INCREMENT,
+  `id` bigint(15) NOT NULL AUTO_INCREMENT,
   `isout` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1出库0入库',
-  `user_id` int(15) NOT NULL COMMENT '用户id',
+  `user_id` bigint(15) NOT NULL COMMENT '用户id',
   `user_name` varchar(40) NOT NULL COMMENT '用户名',
-  `goods_id` int(15) NOT NULL COMMENT '产品id',
+  `goods_id` bigint(15) NOT NULL COMMENT '产品id',
   `goods_name` varchar(255) NOT NULL COMMENT '产品名',
-  `goods_count` int(10) NOT NULL COMMENT '商品数量',
+  `goods_count` bigint(15) NOT NULL COMMENT '商品数量',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
@@ -159,10 +159,10 @@ CREATE TABLE `t_out_lib_log` (
 -- ----------------------------
 DROP TABLE IF EXISTS `t_receipt`;
 CREATE TABLE `t_receipt` (
-  `id` int(15) unsigned NOT NULL AUTO_INCREMENT,
-  `order_id` int(15) NOT NULL,
-  `money` int(15) DEFAULT NULL COMMENT '收款金额',
-  `user_id` int(15) DEFAULT NULL COMMENT '收款人id',
+  `id` bigint(15) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(15) NOT NULL,
+  `money` bigint(15) DEFAULT NULL COMMENT '收款金额',
+  `user_id` bigint(15) DEFAULT NULL COMMENT '收款人id',
   `remark` varchar(100) DEFAULT NULL COMMENT '收款备注',
   `create_time` timestamp NULL DEFAULT NULL,
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -178,8 +178,8 @@ CREATE TABLE `t_receipt` (
 -- ----------------------------
 DROP TABLE IF EXISTS `t_role`;
 CREATE TABLE `t_role` (
-  `id` int(15) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级id',
+  `id` bigint(15) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `pid` bigint(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级id',
   `name` varchar(255) DEFAULT NULL COMMENT '角色名',
   PRIMARY KEY (`id`),
   UNIQUE KEY `un_name` (`name`)
@@ -196,9 +196,9 @@ INSERT INTO `t_role` VALUES ('3', '1', '总经理');
 -- ----------------------------
 DROP TABLE IF EXISTS `t_role_enum`;
 CREATE TABLE `t_role_enum` (
-  `id` int(15) unsigned NOT NULL AUTO_INCREMENT,
-  `role_id` int(15) NOT NULL COMMENT '角色id',
-  `enum_id` int(15) NOT NULL COMMENT '菜单id',
+  `id` bigint(15) unsigned NOT NULL AUTO_INCREMENT,
+  `role_id` bigint(15) NOT NULL COMMENT '角色id',
+  `enum_id` bigint(15) NOT NULL COMMENT '菜单id',
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8 COMMENT='角色菜单表';
@@ -245,8 +245,8 @@ INSERT INTO `t_role_enum` VALUES ('135', '1', '29', '2018-03-12 17:55:23');
 -- ----------------------------
 DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user` (
-  `id` int(15) unsigned NOT NULL AUTO_INCREMENT,
-  `pid` int(15) NOT NULL DEFAULT '0' COMMENT '上级id',
+  `id` bigint(15) unsigned NOT NULL AUTO_INCREMENT,
+  `pid` bigint(15) NOT NULL DEFAULT '0' COMMENT '上级id',
   `name` varchar(40) NOT NULL COMMENT '用户名',
   `password` varchar(30) NOT NULL COMMENT '密码',
   `real_name` varchar(40) DEFAULT NULL,
@@ -269,9 +269,9 @@ INSERT INTO `t_user` VALUES ('2', '1', 'jingpj', '123123', null, null, null, '1'
 -- ----------------------------
 DROP TABLE IF EXISTS `t_user_role`;
 CREATE TABLE `t_user_role` (
-  `id` int(15) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(15) unsigned NOT NULL COMMENT '用户id',
-  `role_id` int(15) unsigned NOT NULL COMMENT '角色id',
+  `id` bigint(15) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(15) unsigned NOT NULL COMMENT '用户id',
+  `role_id` bigint(15) unsigned NOT NULL COMMENT '角色id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
 

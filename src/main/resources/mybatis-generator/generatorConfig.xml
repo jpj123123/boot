@@ -47,10 +47,10 @@
                enableUpdateByExample="false"/>-->
        <!-- <table domainObjectName="Goods" tableName="t_goods" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>-->
-<!--        <table domainObjectName="Order" tableName="t_order" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>-->
-      <!--  <table domainObjectName="Receipt" tableName="t_receipt" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>-->
+        <table domainObjectName="Order" tableName="t_order" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+        <table domainObjectName="Receipt" tableName="t_receipt" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
         <!--<table domainObjectName="Role" tableName="t_role" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
         <table domainObjectName="User" tableName="t_user" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"

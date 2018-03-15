@@ -7,13 +7,13 @@ import jpj.boot.entity.TEnum;
 import java.util.List;
 
 public interface TEnumService {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(TEnum record);
 
     int insertSelective(TEnum record);
 
-    TEnum selectByPrimaryKey(Integer id);
+    TEnum selectByPrimaryKey(Long id);
 
     TEnum selectByCode(String code);
 
@@ -21,13 +21,13 @@ public interface TEnumService {
 
     int updateByPrimaryKey(TEnum record);
 
-    List<TEnum> listByPid(Integer id);
+    List<TEnum> listByPid(Long id);
 
-    List<EnumDto> listChildByPidAndRoleId(Integer pid, Integer roleId);
+    List<EnumDto> listChildByPidAndRoleId(Long pid, Long roleId);
 
     boolean addEnumSubmit(SubmitEnumDto dto);
 
-    boolean deleteEnum(Integer id, Byte type);
+    boolean deleteEnum(Long id, Byte type);
 
-    List<EnumDto> listEnumDtoAllByPid(Integer pid, Integer roleId);
+    List<EnumDto> listEnumDtoAllByPid(Long pid, Long roleId);
 }

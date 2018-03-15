@@ -8,27 +8,27 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface RoleMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Role record);
 
     int insertSelective(Role record);
 
-    Role selectByPrimaryKey(Integer id);
+    Role selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
 
-    Role selectRoleByUserId(Integer id);
+    Role selectRoleByUserId(Long id);
 
     List<Role> listAll();
 
-    void deleteRoleEnumByRoleId(Integer roleId);
+    void deleteRoleEnumByRoleId(Long roleId);
 
-    void insertRoleEnums(@Param("roleId") Integer roleId, @Param("enumIds") Integer[] enumIds);
+    void insertRoleEnums(@Param("roleId") Long roleId, @Param("enumIds") Long[] enumIds);
 
-    int deleteUserRoleByUserId(Integer userId);
+    int deleteUserRoleByUserId(Long userId);
 
-    int insertUserRole(@Param("userId") Integer userId, @Param("roleId") Integer roleId);
+    int insertUserRole(@Param("userId") Long userId, @Param("roleId") Long roleId);
 }

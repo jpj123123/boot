@@ -10,21 +10,21 @@ import java.util.List;
  * @Date：creste in 2018/3/5
  */
 public interface RoleService {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Role record);
 
     int insertSelective(Role record);
 
-    Role selectByPrimaryKey(Integer id);
+    Role selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
 
-    Role selectRoleByUserId(Integer id);
+    Role selectRoleByUserId(Long id);
 
     List<Role> listAll();
 
-    boolean addRoleEnumSubmit(Integer roleId, Integer[] enumIds);
+    boolean addRoleEnumSubmit(Long roleId, Long[] enumIds);
 }

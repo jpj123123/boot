@@ -38,8 +38,8 @@ public class EnumController {
     @ResponseBody
     @RequestMapping("/listEnum")
     public List<EnumDto> listEnum(HttpServletRequest request) {
-        Integer pid = 0;
-        Integer id = HttpSessionUtil.getUserId(request.getSession());
+        Long pid = 0L;
+        Long id = HttpSessionUtil.getUserId(request.getSession());
         Role role = userService.selectRoleByUserId(id);
         if (role == null) {
             return null;
@@ -49,8 +49,8 @@ public class EnumController {
     }
     @ResponseBody
     @RequestMapping("/listEnumDtoAll")
-    public List<EnumDto> listEnumDtoAll(HttpServletRequest request,Integer roleId) {
-        List<EnumDto> list = tEnumService.listEnumDtoAllByPid(0, roleId);
+    public List<EnumDto> listEnumDtoAll(HttpServletRequest request,Long roleId) {
+        List<EnumDto> list = tEnumService.listEnumDtoAllByPid(0L, roleId);
         return list;
     }
     /**
@@ -60,7 +60,7 @@ public class EnumController {
      */
     @ResponseBody
     @RequestMapping("/listEnumAll")
-    public List<TEnum> getEnum(HttpServletRequest request,Integer pid) {
+    public List<TEnum> getEnum(HttpServletRequest request,Long pid) {
         return tEnumService.listByPid(pid);
     }
     /**
@@ -82,7 +82,7 @@ public class EnumController {
     }
 
     @RequestMapping("/addEnum")
-    public ModelAndView addEnum(HttpServletRequest request, Integer pid) {
+    public ModelAndView addEnum(HttpServletRequest request, Long pid) {
 
         ModelAndView mav = new ModelAndView();
 
@@ -101,7 +101,7 @@ public class EnumController {
         return mav;
     }
     @RequestMapping("/editEnum")
-    public ModelAndView editEnum(HttpServletRequest request, Integer id) {
+    public ModelAndView editEnum(HttpServletRequest request, Long id) {
 
         ModelAndView mav = new ModelAndView();
 
@@ -141,7 +141,7 @@ public class EnumController {
     }
     @ResponseBody
     @RequestMapping("/deleteEnum")
-    public boolean deleteEnum(HttpServletRequest request, Integer id) {
+    public boolean deleteEnum(HttpServletRequest request, Long id) {
         if(id==0)
             return false;
         TEnum tEnum = tEnumService.selectByPrimaryKey(id);

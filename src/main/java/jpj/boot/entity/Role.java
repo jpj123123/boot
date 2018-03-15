@@ -1,25 +1,25 @@
 package jpj.boot.entity;
 
 public class Role {
-    private Integer id;
+    private Long id;
 
-    private Integer pid;
+    private Long pid;
 
     private String name;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getPid() {
+    public Long getPid() {
         return pid;
     }
 
-    public void setPid(Integer pid) {
+    public void setPid(Long pid) {
         this.pid = pid;
     }
 
@@ -31,13 +31,13 @@ public class Role {
         this.name = name == null ? null : name.trim();
     }
 
-    private Integer userId;
+    private Long userId;
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 }

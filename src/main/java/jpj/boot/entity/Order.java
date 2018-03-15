@@ -3,23 +3,23 @@ package jpj.boot.entity;
 import java.util.Date;
 
 public class Order {
-    private Integer id;
+    private Long id;
 
     private String orderNo;
 
-    private Integer goodsId;
+    private Long goodsId;
 
-    private Integer userId;
+    private Long userId;
 
-    private Integer customerId;
+    private Long customerId;
 
-    private Integer count;
+    private Long count;
 
-    private Integer price;
+    private Long price;
 
-    private Integer totalPrice;
+    private Long totalPrice;
 
-    private Integer payMoney;
+    private Long payMoney;
 
     private Byte status;
 
@@ -27,11 +27,11 @@ public class Order {
 
     private Date updateTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -43,59 +43,59 @@ public class Order {
         this.orderNo = orderNo == null ? null : orderNo.trim();
     }
 
-    public Integer getGoodsId() {
+    public Long getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(Integer goodsId) {
+    public void setGoodsId(Long goodsId) {
         this.goodsId = goodsId;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public Integer getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 
-    public Integer getCount() {
+    public Long getCount() {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(Long count) {
         this.count = count;
     }
 
-    public Integer getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
-    public Integer getTotalPrice() {
+    public Long getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Integer totalPrice) {
+    public void setTotalPrice(Long totalPrice) {
         this.totalPrice = totalPrice;
     }
 
-    public Integer getPayMoney() {
+    public Long getPayMoney() {
         return payMoney;
     }
 
-    public void setPayMoney(Integer payMoney) {
+    public void setPayMoney(Long payMoney) {
         this.payMoney = payMoney;
     }
 

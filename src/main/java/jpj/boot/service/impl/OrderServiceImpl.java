@@ -16,7 +16,7 @@ public class OrderServiceImpl implements OrderService {
     @Resource
     private OrderMapper orderMapper;
     @Override
-    public int deleteByPrimaryKey(Integer id) {
+    public int deleteByPrimaryKey(Long id) {
         return orderMapper.deleteByPrimaryKey(id);
     }
 
@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order selectByPrimaryKey(Integer id) {
+    public Order selectByPrimaryKey(Long id) {
         return orderMapper.selectByPrimaryKey(id);
     }
 

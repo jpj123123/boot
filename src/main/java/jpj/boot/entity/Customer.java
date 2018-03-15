@@ -1,7 +1,7 @@
 package jpj.boot.entity;
 
 public class Customer {
-    private Integer id;
+    private Long id;
 
     private String name;
 
@@ -11,15 +11,15 @@ public class Customer {
 
     private String address;
 
-    private Integer money;
+    private Long money;
 
-    private Integer userId;
+    private Long userId;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -55,19 +55,19 @@ public class Customer {
         this.address = address == null ? null : address.trim();
     }
 
-    public Integer getMoney() {
+    public Long getMoney() {
         return money;
     }
 
-    public void setMoney(Integer money) {
+    public void setMoney(Long money) {
         this.money = money;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

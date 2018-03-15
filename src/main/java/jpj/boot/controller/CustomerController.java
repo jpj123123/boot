@@ -74,7 +74,7 @@ public class CustomerController {
     }
 
     @RequestMapping("/edit")
-    public ModelAndView edit(Integer id) {
+    public ModelAndView edit(Long id) {
         ModelAndView mav = new ModelAndView("/customer/edit");
         Customer customer = customerService.selectByPrimaryKey(id);
         if (customer == null) {
@@ -111,7 +111,7 @@ public class CustomerController {
 
     @ResponseBody
     @RequestMapping("/delete")
-    public boolean delete(HttpServletRequest request, Integer id) {
+    public boolean delete(HttpServletRequest request, Long id) {
         logger.info("userId:"+ HttpSessionUtil.getUserId(request.getSession())+"删除用户：id"+ id);
         return customerService.deleteCustomerByPrimaryKey(id) > 0;
     }

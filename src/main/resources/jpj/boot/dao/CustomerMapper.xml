@@ -2,24 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jpj.boot.dao.CustomerMapper">
   <resultMap id="BaseResultMap" type="jpj.boot.entity.Customer">
-    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="money" jdbcType="INTEGER" property="money" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="money" jdbcType="BIGINT" property="money" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="userName" jdbcType="VARCHAR" property="userName" />
     <result column="userRealName" jdbcType="VARCHAR" property="userRealName" />
   </resultMap>
   <sql id="Base_Column_List">
     id, name, password, phone, address, money, user_id
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_customer
-    where id = #{id,jdbcType=INTEGER} AND isdelete=0
+    where id = #{id,jdbcType=BIGINT} AND isdelete=0
   </select>
 
   <select id="selectByPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -38,17 +38,17 @@
     WHERE   tc.isdelete=0
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_customer
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="jpj.boot.entity.Customer">
     insert into t_customer (id, name, password, 
       phone, address, money, 
       user_id)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{money,jdbcType=INTEGER}, 
-      #{userId,jdbcType=INTEGER})
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{money,jdbcType=BIGINT}, 
+      #{userId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="jpj.boot.entity.Customer">
     insert into t_customer
@@ -77,7 +77,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=BIGINT},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
@@ -92,10 +92,10 @@
         #{address,jdbcType=VARCHAR},
       </if>
       <if test="money != null">
-        #{money,jdbcType=INTEGER},
+        #{money,jdbcType=BIGINT},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -115,13 +115,13 @@
         address = #{address,jdbcType=VARCHAR},
       </if>
       <if test="money != null">
-        money = #{money,jdbcType=INTEGER},
+        money = #{money,jdbcType=BIGINT},
       </if>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="jpj.boot.entity.Customer">
     update t_customer
@@ -129,13 +129,13 @@
       password = #{password,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
-      money = #{money,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+      money = #{money,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="deleteCustomerByPrimaryKey" parameterType="jpj.boot.entity.Customer">
     update t_customer
     set isdelete=1
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

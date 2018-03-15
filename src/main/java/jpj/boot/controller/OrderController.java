@@ -38,7 +38,7 @@ public class OrderController {
     @ResponseBody
     @RequestMapping("/listAll")
     public List<Goods> listAll(HttpServletRequest request){
-        Integer userId = HttpSessionUtil.getUserId(request.getSession());
+        Long userId = HttpSessionUtil.getUserId(request.getSession());
         return null;//nuorderService.listAll();
     }
 }

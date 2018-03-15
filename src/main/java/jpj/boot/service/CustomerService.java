@@ -10,13 +10,13 @@ import java.util.List;
  * @Date：creste in 2018/3/7
  */
 public interface CustomerService {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Customer record);
 
     int insertSelective(Customer record);
 
-    Customer selectByPrimaryKey(Integer id);
+    Customer selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Customer record);
 
@@ -26,5 +26,5 @@ public interface CustomerService {
 
     Customer selectByPhone(String phone);
 
-    int deleteCustomerByPrimaryKey(Integer id);
+    int deleteCustomerByPrimaryKey(Long id);
 }
