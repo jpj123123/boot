@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50638
 File Encoding         : 65001
 
-Date: 2018-03-15 10:12:08
+Date: 2018-03-15 18:08:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -102,12 +102,14 @@ CREATE TABLE `t_goods` (
   `create_time` timestamp NULL DEFAULT NULL,
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='商品表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='商品表';
 
 -- ----------------------------
 -- Records of t_goods
 -- ----------------------------
 INSERT INTO `t_goods` VALUES ('1', 'yangyuan', '养元六个核桃', '5200', '6200', '0', '1', '1', null, null);
+INSERT INTO `t_goods` VALUES ('2', 'hunqing', '婚庆六个核桃', '3600', '4200', '200', '1', '1', '2018-03-15 10:42:59', '2018-03-15 10:42:59');
+INSERT INTO `t_goods` VALUES ('3', 'mutangchun', '木糖醇', '1500', '3000', '300', '1', '1', '2018-03-15 11:46:13', '2018-03-15 11:46:13');
 
 -- ----------------------------
 -- Table structure for `t_order`
@@ -145,14 +147,16 @@ CREATE TABLE `t_out_lib_log` (
   `goods_id` bigint(15) NOT NULL COMMENT '产品id',
   `goods_name` varchar(255) NOT NULL COMMENT '产品名',
   `goods_count` bigint(15) NOT NULL COMMENT '商品数量',
+  `create_user_id` bigint(15) NOT NULL COMMENT '操作用户',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出库记录';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='出库记录';
 
 -- ----------------------------
 -- Records of t_out_lib_log
 -- ----------------------------
+INSERT INTO `t_out_lib_log` VALUES ('1', '0', '1', 'admin', '3', '木糖醇', '300', '1', '2018-03-15 11:46:13', '添加商品时添加的初始库存记录');
 
 -- ----------------------------
 -- Table structure for `t_receipt`
@@ -183,13 +187,14 @@ CREATE TABLE `t_role` (
   `name` varchar(255) DEFAULT NULL COMMENT '角色名',
   PRIMARY KEY (`id`),
   UNIQUE KEY `un_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='角色表';
 
 -- ----------------------------
 -- Records of t_role
 -- ----------------------------
 INSERT INTO `t_role` VALUES ('1', '0', 'root');
 INSERT INTO `t_role` VALUES ('3', '1', '总经理');
+INSERT INTO `t_role` VALUES ('4', '3', '业务员');
 
 -- ----------------------------
 -- Table structure for `t_role_enum`
@@ -252,17 +257,56 @@ CREATE TABLE `t_user` (
   `real_name` varchar(40) DEFAULT NULL,
   `phone` varchar(15) DEFAULT NULL COMMENT '电话',
   `address` varchar(255) DEFAULT NULL COMMENT '住址',
-  `isused` tinyint(1) DEFAULT '1' COMMENT '0删除1有效用户',
+  `issale` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否是销售1是0不是',
+  `isused` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0删除1有效用户',
   `create_time` timestamp NULL DEFAULT NULL,
   `update_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('1', '0', 'admin', '123456', null, null, '鹤壁', '1', '2018-02-28 15:46:14', '2018-02-28 15:46:20');
-INSERT INTO `t_user` VALUES ('2', '1', 'jingpj', '123123', null, null, null, '1', '2018-03-06 18:28:24', '2018-03-06 18:28:24');
+INSERT INTO `t_user` VALUES ('1', '0', 'admin', '123456', null, null, '鹤壁', '0', '1', '2018-02-28 15:46:14', '2018-02-28 15:46:20');
+INSERT INTO `t_user` VALUES ('2', '1', 'jingpj', '123123', null, null, null, '0', '1', '2018-03-06 18:28:24', '2018-03-06 18:28:24');
+INSERT INTO `t_user` VALUES ('3', '2', '老三', '123456', null, null, null, '1', '1', '2018-03-15 18:01:52', '2018-03-15 18:01:52');
+
+-- ----------------------------
+-- Table structure for `t_user_goods`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_user_goods`;
+CREATE TABLE `t_user_goods` (
+  `id` bigint(15) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `user_id` bigint(15) NOT NULL,
+  `goods_id` bigint(15) NOT NULL,
+  `goods_count` bigint(15) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_user_goods
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `t_user_goods_log`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_user_goods_log`;
+CREATE TABLE `t_user_goods_log` (
+  `id` bigint(15) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(15) NOT NULL,
+  `customer_id` bigint(15) NOT NULL COMMENT '0表示仓库',
+  `goods_id` bigint(15) NOT NULL,
+  `goods_count` bigint(15) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户记录商品流水表';
+
+-- ----------------------------
+-- Records of t_user_goods_log
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `t_user_role`
@@ -273,10 +317,11 @@ CREATE TABLE `t_user_role` (
   `user_id` bigint(15) unsigned NOT NULL COMMENT '用户id',
   `role_id` bigint(15) unsigned NOT NULL COMMENT '角色id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
 
 -- ----------------------------
 -- Records of t_user_role
 -- ----------------------------
 INSERT INTO `t_user_role` VALUES ('1', '1', '1');
 INSERT INTO `t_user_role` VALUES ('2', '2', '3');
+INSERT INTO `t_user_role` VALUES ('3', '3', '4');
