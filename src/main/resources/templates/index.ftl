@@ -7,7 +7,29 @@
     <script src="/public/easyui/jquery.easyui.min.js" type="text/javascript"></script>
     <link href="/public/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css"/>
     <link href="/public/easyui/themes/icon.css" rel="stylesheet" type="text/css"/>
+    <script src="/public/laydate/laydate.js"></script>
     <script type="text/javascript">
+        var dateFormat=({
+            year_format : "yyyy",
+            month_format : "yyyy-MM-dd",
+            date_format : "yyyy-MM-dd",
+            min_format : "yyyy-MM-dd HH:mm",
+            datetime_format : "yyyy-MM-dd HH:mm:ss",
+
+            getDate : function(dateStr, format){
+                if(format == undefined || format == null || dateStr ==undefined || dateStr == null)
+                    return null;
+
+                var date = new Date(0);
+                if(format.indexOf("yyyy")>=0){
+                    console.log(dateStr.substr(format.indexOf("yyyy"),4))
+                    date.setFullYear(dateStr.substr(format.indexOf("yyyy"),4));
+                    console.log(date.getFullYear()+date.getMonth() + date.getHours())
+                }
+
+                //if(datetime_format.concat(format))
+            }
+        })
         $(function(){
             $('#enum_tree').tree({
                 url: "/enum/listEnum",

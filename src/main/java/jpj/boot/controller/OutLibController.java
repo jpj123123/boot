@@ -1,14 +1,17 @@
 package jpj.boot.controller;
 
+import jpj.boot.cache.UserCache;
 import jpj.boot.dto.SubmitGoodsDto;
 import jpj.boot.dto.SubmitOutLibDto;
 import jpj.boot.entity.Goods;
+import jpj.boot.entity.OutLib;
 import jpj.boot.entity.TEnum;
 import jpj.boot.exception.BuisnessException;
 import jpj.boot.service.GoodsService;
 import jpj.boot.service.OutLibService;
 import jpj.boot.service.TEnumService;
 import jpj.boot.util.BeanValidator;
+import jpj.boot.util.DateHelper;
 import jpj.boot.util.HttpSessionUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: jingpj
@@ -38,11 +43,23 @@ public class OutLibController {
         if (tEnum != null && tEnum.getType() == 2) {
             mav.addObject("btns", tEnumService.listByPid(tEnum.getId()));
         }
+        mav.addObject("date", DateHelper.formatDate(new Date(), DateHelper.pattern_date));
+//        if(UserCache.CACHE_SALES != null){
+//            mav.addObject("sales", UserCache.CACHE_SALES);
+//        }
         return mav;
+    }
+    @RequestMapping("/listAll")
+    public List<OutLib> listAll(HttpServletRequest request){
+        String startDate = request.getParameter("datestart");
+        return null;
     }
     @RequestMapping("/add")
     public ModelAndView add() {
         ModelAndView mav = new ModelAndView("/goods/add");
+        if(UserCache.CACHE_SALES != null){
+            mav.addObject("sales", UserCache.CACHE_SALES);
+        }
         return mav;
     }
 
