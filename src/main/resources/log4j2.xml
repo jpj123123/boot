@@ -1,19 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--启动项设置为 trace，加载 springboot 启动内部各种详细输出-->
 <Configuration status="trace">
+    <Properties>
+        <Property name="logbasedir">e:/log</Property>
+        <Property name="log.layout">%d %-5p %t (%c:%L) - %m%n</Property>
+
+    </Properties>
+    <!-- 日志级别OFF:0 FATAL:100 ERROR:200 WARN:300 INFO:400 DEBUG:500 TRACE:600 ALL: Integer.MAX_VALUE-->
     <Appenders>
         <!--添加一个控制台追加器-->
         <Console name="Console" target="SYSTEM_OUT" follow="true">
             <PatternLayout>
-                <pattern>[%-5p] %d %c - %m%n</pattern>
+                <pattern>${log.layout}</pattern>
             </PatternLayout>
         </Console>
         <!--添加一个文本追加器，文件位于根目录下，名为log.log-->
-        <File name="File" fileName="e:/boot_log.log">
-            <PatternLayout>
-                <pattern>[%-5p] %d %c - %m%n</pattern>
-            </PatternLayout>
-        </File>
+        <!--<File name="File" fileName="${logbasedir}/boot_log.log">-->
+            <!--<PatternLayout>-->
+                <!--<pattern>[%-5p] %d %c - %m%n</pattern>-->
+            <!--</PatternLayout>-->
+        <!--</File>-->
+        <!-- 按天分割 -->
+        <!--<RollingFile name="error_appender" fileName="${LOG_HOME}/error.log" filePattern="${LOG_HOME}/error-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss} [%thread] %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>-->
+
+        <!--%d{yyyy-MM-dd-HH-mm}.%i.log 与分割相对应-->
+        <RollingRandomAccessFile name="_1min_appender" fileName="${logbasedir}/boot_log.log" bufferSize="1024"
+                                 filePattern="${logbasedir}/%d{yyyy-MM}/boot_log-%d{yyyy-MM-dd}.%i.log">
+            <PatternLayout pattern="${log.layout}"/>
+            <Policies>
+                <!--interval 分割单位 与时间相对应 yyyy-MM-dd-HH-mm 按分钟 yyyy-MM-dd 按天-->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <!-- %i 与大小分割块相对应 -->
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+            <!--设置分割文件最多分割多少个 默认7-->
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
     </Appenders>
     <Loggers>
         <!--<Logger name="com.github" level="debug" />-->
@@ -24,6 +51,7 @@
         </Logger>
         <!--根记录全部输出到控制台上-->
         <Root level="INFO">
+            <AppenderRef ref="_1min_appender"/>
             <AppenderRef ref="Console" />
         </Root>
     </Loggers>

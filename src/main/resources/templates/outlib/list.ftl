@@ -23,14 +23,23 @@
         })
     });
     var outlib_list_allFun = function(url){
-        console.log($("#datestart").val()+$("#dateend").val())
-        $('#outlib_datagrid_id').datagrid(
-                "reload"
-        );
-    }
-    var getDate = function(date, dateFormat){
+       // console.log($("#datestart").val()+$("#dateend").val());
 
+        var startTime = dateFormat.getTime($("#datestart").val(),dateFormat.date_format)
+        var endTime = dateFormat.getTime($("#dateend").val(),dateFormat.date_format)
+        if(startTime>endTime){
+            $.messager.show({
+                title:'提示',
+                msg:'起始日期不能大于结束日期！',
+                timeout:1000,
+                showType:'slide'
+            });
+        }
+        // $('#outlib_datagrid_id').datagrid(
+        //         "reload"
+        // );
     }
+
     function outlib_addFun(url){
 
         $('#outlib_win').window('open');
