@@ -310,19 +310,11 @@ public class DateHelper {
 	 */
 	public static String formatDateTime(String dateTime) {
 		if ((dateTime != null) && (dateTime.length() >= 8)) {
-			String formatDateTime = dateTime.replaceAll("-", "");
-			formatDateTime = formatDateTime.replaceAll(":", "");
-			String date = formatDateTime.substring(0, 8);
-			String time = formatDateTime.substring(8).trim();
-			for (int i = time.length(); i < 6; ++i) {
-				time = time + "0";
-			}
-			return date + time;
+			return dateTime.replaceAll("\\D", "");
 		}
 
 		return "";
 	}
-
 	/**
 	 * 描述：获取16位日期时间，yyyyMMddHHmmss
 	 * 
@@ -333,5 +325,21 @@ public class DateHelper {
 	public static String formatDateTime(Date date) {
 		String dateTime = formatDate(date);
 		return formatDateTime(dateTime);
+	}
+	/**
+	 * 获取当天初
+	 * @param date
+	 * @return
+	 */
+	public static Date getDateStart(Date date){
+		return parseString(formatDate(date, pattern_date) + " 00:00:00");
+	}
+	/**
+	 * 获取当天末
+	 * @param date
+	 * @return
+	 */
+	public static Date getDateEnd(Date date){
+		return parseString(formatDate(date, pattern_date) + " 23:59:59");
 	}
 }

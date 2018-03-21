@@ -2,6 +2,7 @@ package jpj.boot.service.impl;
 
 import jpj.boot.cache.UserCache;
 import jpj.boot.dao.OutLibMapper;
+import jpj.boot.dto.query.OutLibQuery;
 import jpj.boot.entity.OutLib;
 import jpj.boot.entity.User;
 import jpj.boot.service.OutLibService;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: jingpj
@@ -80,5 +82,10 @@ public class OutLibServiceImpl implements OutLibService{
     @Override
     public int updateByPrimaryKey(OutLib record) {
         return outLibMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public List<OutLib> listByQuery(OutLibQuery outLibQuery) {
+        return outLibMapper.listByQuery(outLibQuery);
     }
 }

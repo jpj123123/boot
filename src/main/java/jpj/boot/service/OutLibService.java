@@ -1,6 +1,9 @@
 package jpj.boot.service;
 
+import jpj.boot.dto.query.OutLibQuery;
 import jpj.boot.entity.OutLib;
+
+import java.util.List;
 
 /**
  * @Author: jingpj
@@ -31,4 +34,6 @@ public interface OutLibService {
     int updateByPrimaryKeySelective(OutLib record);
 
     int updateByPrimaryKey(OutLib record);
+
+    List<OutLib> listByQuery(OutLibQuery outLibQuery);
 }

@@ -23,8 +23,6 @@
         })
     });
     var outlib_list_allFun = function(url){
-       // console.log($("#datestart").val()+$("#dateend").val());
-
         var startTime = dateFormat.getTime($("#datestart").val(),dateFormat.date_format)
         var endTime = dateFormat.getTime($("#dateend").val(),dateFormat.date_format)
         if(startTime>endTime){
@@ -35,6 +33,25 @@
                 showType:'slide'
             });
         }
+        $.ajax({
+            url: url,
+            type:"post",
+            data:{"datestart":$("#datestart").val(),
+                    "dateend": $("#dateend").val()
+            },
+            success:function(res){
+                console.log(res);
+                if(res.code == 0){
+                    $.messager.show({
+                        title:'提示',
+                        msg:'删除成功！',
+                        timeout:1000,
+                        showType:'slide'
+                    });
+                    win_closeFun()
+                }
+            }
+        });
         // $('#outlib_datagrid_id').datagrid(
         //         "reload"
         // );

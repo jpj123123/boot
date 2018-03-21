@@ -17,11 +17,27 @@
     id, isout, user_id, user_name, goods_id, goods_name, goods_count, create_user_id, 
     create_time, remark
   </sql>
+  <sql id="query_sql">
+    <where>
+      <if test="start != null" >
+        AND create_time >= #{start}
+      </if>
+      <if test="end != null" >
+        AND create_time &lt;= #{end}
+      </if>
+    </where>
+  </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from t_out_lib_log
     where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="listByQuery" resultMap="BaseResultMap" parameterType="jpj.boot.dto.query.OutLibQuery" >
+    select
+    <include refid="Base_Column_List" />
+    from t_out_lib_log
+    <include refid="query_sql" />
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_out_lib_log

@@ -3,6 +3,7 @@ package jpj.boot.controller;
 import jpj.boot.cache.UserCache;
 import jpj.boot.dto.SubmitGoodsDto;
 import jpj.boot.dto.SubmitOutLibDto;
+import jpj.boot.dto.query.OutLibQuery;
 import jpj.boot.entity.Goods;
 import jpj.boot.entity.OutLib;
 import jpj.boot.entity.TEnum;
@@ -52,7 +53,15 @@ public class OutLibController {
     @RequestMapping("/listAll")
     public List<OutLib> listAll(HttpServletRequest request){
         String startDate = request.getParameter("datestart");
-        return null;
+        String endDate = request.getParameter("dateend");
+        Date start = DateHelper.getDateStart(DateHelper.parseString(startDate, DateHelper.pattern_date));
+        Date end = DateHelper.getDateEnd(DateHelper.parseString(endDate, DateHelper.pattern_date));
+
+        OutLibQuery outLibQuery = new OutLibQuery();
+        outLibQuery.setStart(start);
+        outLibQuery.setEnd(end);
+
+        return outLibService.listByQuery(outLibQuery);
     }
     @RequestMapping("/add")
     public ModelAndView add() {
@@ -73,6 +82,6 @@ public class OutLibController {
             throw new BuisnessException("商品不存在 ！");
         }
         outLibService.insert(dto.isOut(), dto.getGoodsId(), goods.getName(), dto.getGoodsCount(), dto.getUserId(), createUserId, dto.getRemark());
-        return false;
+        return true;
     }
 }
