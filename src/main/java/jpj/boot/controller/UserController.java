@@ -1,5 +1,7 @@
 package jpj.boot.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import jpj.boot.dto.SubmitEnumDto;
 import jpj.boot.dto.SubmitUserDto;
 import jpj.boot.dto.UserLoginDto;
@@ -15,6 +17,7 @@ import jpj.boot.service.UserService;
 import jpj.boot.util.BeanValidator;
 import jpj.boot.util.HttpSessionUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
@@ -129,10 +132,16 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping("/listUser")
-    public List<User> listUser() {
+    public PageInfo listUser(HttpServletRequest request) {
         //logger.info("测试log4j2");
         //testLintenerService.doSome("jingpj");
-        return userService.listUser();
+        logger.info(request.getParameter("pageNumber")+":"+request.getParameter("pageSize"));
+        int pageNumber = NumberUtils.toInt(request.getParameter("pageNumber"), 1);
+        int pageSize = NumberUtils.toInt(request.getParameter("pageSize"), 20);
+        PageHelper.startPage(pageNumber, pageSize);
+        List<User> list = userService.listUser();
+        PageInfo pageInfo = new PageInfo(list);
+        return pageInfo;
     }
 
     @RequestMapping("/add")

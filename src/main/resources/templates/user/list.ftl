@@ -3,6 +3,10 @@
         $('#user_datagrid_id').datagrid({
             url:'/user/listUser',
             singleSelect:true,
+            queryParams:{
+                "pageNumber":1,
+                "pageSize":20
+            },
             columns: [[
                 {title: 'id', field: 'id', width: 50},
                 {title: 'pid', field: 'pid', width: 50},
@@ -14,14 +18,17 @@
             ]],
             <#--//data:${enums},-->
             loadFilter:function(data){
-                console.log(data);
-                return data.body;
+                console.log(data)
+                var page = data.body;
+                reload_page("user_pp",data);
+                return data.body.list;
             },
             onBeforeExpand: function (row) {
                 return true;
             }
         })
     });
+
     var user_list_allFun = function(url){
         $('#user_datagrid_id').datagrid(
                 "reload"
@@ -127,19 +134,55 @@
         );
     }
 </script>
-<div>
-    <#--<a id="btn" href="javascript:void(0)" onclick="enum_addFun('/enum/addEnum')"  class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加</a>-->
-    <#list btns as item>
+<div class="easyui-layout" style="width:100%;height:100%">
+    <div data-options="region:'north'" style="height:50px">
+        <#list btns as item>
 
-    <a id="btn" href="javascript:void(0)" onclick="${item.code}Fun('${item.url}')"  class="easyui-linkbutton" data-options="iconCls:'${item.icons}'">${item.name}</a>
-    <#else>
-    <#--//空时做的操作-->
-    </#list>
+            <a id="btn" href="javascript:void(0)" onclick="${item.code}Fun('${item.url}')"  class="easyui-linkbutton" data-options="iconCls:'${item.icons}'">${item.name}</a>
+        <#else>
+        <#--//空时做的操作-->
+        </#list>
+    </div>
+    <div data-options="region:'center'">
+        <table id="user_datagrid_id" style="width:100%;height:100%">
 
-</div>
-<table id="user_datagrid_id" style="width:100%;height:100%">
-</table>
-<div id="user_win" class="easyui-window" title="My Window" style="width:600px;height:400px"
-     data-options="iconCls:'icon-save',modal:true,closed:true">
+        </table>
+        <div id="user_win" class="easyui-window" title="My Window" style="width:600px;height:400px"
+             data-options="iconCls:'icon-save',modal:true,closed:true">
 
+        </div>
+    </div>
+    <div data-options="region:'south'" style="height:35px;">
+        <div id="user_pp" style="background:#efefef;border:1px solid #ccc;"></div>
+        <script type="text/javascript">
+            $('#user_pp').pagination({
+                pageSize:20,
+                pageList:[5,10,20,30,50],
+                onSelectPage:function(pageNumber, pageSize){
+                    $('#user_datagrid_id').datagrid('load',{
+                        "pageNumber": pageNumber,
+                        "pageSize": pageSize
+                    });
+                },
+                onChangePageSize:function(pageSize){
+                    var pageNumber = $('#user_pp').pagination("options").pageNumber;
+                    $('#user_datagrid_id').datagrid('load',{
+                        'pageNumber': pageNumber,
+                        'pageSize': pageSize
+                    });
+                }
+            });
+            var reload_page = function(id, data){
+                var page = data.body;
+                if(page){
+                    $('#'+id).pagination('refresh',{	// 改变选项，并刷新分页栏信息
+                        total: page.total,
+                        pageNumber: page.pageNum,
+                        pageSize: page.pageSize
+
+                    });
+                }
+            }
+        </script>
+    </div>
 </div>
