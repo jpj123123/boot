@@ -98,14 +98,14 @@ public class OutLibController {
             throw new BuisnessException("商品不存在 ！");
         }
         Long goodsCount = Math.abs(dto.getGoodsCount());
-        if (dto.getIsOut() == 1) {//出库数据为负数
+        if (dto.getIsOut()) {//出库数据为负数
             goodsCount = -goodsCount;
         }
         if(goods.getCount() + goodsCount < 0){
             throw new BuisnessException("库存不足");
         }
         Long userId = dto.getUserId() == 0 ? createUserId : dto.getUserId();
-        outLibService.insertSubmit((dto.getIsOut() == 1), dto.getGoodsId(), goods.getName(), dto.getGoodsCount(), userId, createUserId, dto.getRemark());
+        outLibService.insertSubmit(dto.getIsOut(), dto.getGoodsId(), goods.getName(), dto.getGoodsCount(), userId, createUserId, dto.getRemark());
         return true;
     }
 }

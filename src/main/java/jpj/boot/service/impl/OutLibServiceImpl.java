@@ -101,6 +101,6 @@ public class OutLibServiceImpl implements OutLibService {
             goodsCount = -goodsCount;
         }
         goodsService.updateCount(goodsId, goodsCount);
-        return insertSubmit(isOut, goodsId, name, goodsCount, userId, createUserId, remark);
+        return insert(isOut, goodsId, name, goodsCount, userId, createUserId, remark);
     }
 }
