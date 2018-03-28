@@ -27,4 +27,6 @@ public interface GoodsService {
     Goods selectByCode(String code);
 
     int deleteGoodsByPrimaryKey(Long id);
+
+    int updateCount(Long goodsId, Long goodsCount);
 }

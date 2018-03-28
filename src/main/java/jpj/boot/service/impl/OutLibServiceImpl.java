@@ -5,6 +5,7 @@ import jpj.boot.dao.OutLibMapper;
 import jpj.boot.dto.query.OutLibQuery;
 import jpj.boot.entity.OutLib;
 import jpj.boot.entity.User;
+import jpj.boot.service.GoodsService;
 import jpj.boot.service.OutLibService;
 import jpj.boot.service.UserGoodsService;
 import jpj.boot.service.UserService;
@@ -20,13 +21,16 @@ import java.util.List;
  * @Date：creste in 2018/3/15
  */
 @Service
-public class OutLibServiceImpl implements OutLibService{
+public class OutLibServiceImpl implements OutLibService {
     @Resource
     private OutLibMapper outLibMapper;
     @Resource
     private UserService userService;
     @Resource
     private UserGoodsService userGoodsService;
+    @Resource
+    private GoodsService goodsService;
+
     @Override
     public int deleteByPrimaryKey(Long id) {
         return outLibMapper.deleteByPrimaryKey(id);
@@ -39,13 +43,13 @@ public class OutLibServiceImpl implements OutLibService{
         outLib.setGoodsId(goodsId);
         outLib.setGoodsName(goodsName);
         goodsCount = Math.abs(goodsCount);
-        if(isOut){//出库数据为负数
-            goodsCount = - goodsCount;
+        if (isOut) {//出库数据为负数
+            goodsCount = -goodsCount;
         }
         outLib.setGoodsCount(goodsCount);
         outLib.setUserId(userId);
         User user = userService.selectByPrimaryKey(userId);
-        if(user != null){
+        if (user != null) {
             outLib.setUserName(user.getName());
         }
 
@@ -53,7 +57,7 @@ public class OutLibServiceImpl implements OutLibService{
         outLib.setRemark(remark);
         outLib.setCreateUserId(createUserId);
         outLib.setCreateTime(new Date());
-        if(UserCache.Contain(userId)){
+        if (UserCache.Contain(userId)) {
             userGoodsService.updateUserGoods(goodsId, userId, -goodsCount, 0L);
         }
         return this.insert(outLib);
@@ -87,5 +91,16 @@ public class OutLibServiceImpl implements OutLibService{
     @Override
     public List<OutLib> listByQuery(OutLibQuery outLibQuery) {
         return outLibMapper.listByQuery(outLibQuery);
+    }
+
+    @Transactional
+    @Override
+    public int insertSubmit(boolean isOut, Long goodsId, String name, Long goodsCount, Long userId, Long createUserId, String remark) {
+        goodsCount = Math.abs(goodsCount);
+        if (isOut) {//出库数据为负数
+            goodsCount = -goodsCount;
+        }
+        goodsService.updateCount(goodsId, goodsCount);
+        return insertSubmit(isOut, goodsId, name, goodsCount, userId, createUserId, remark);
     }
 }

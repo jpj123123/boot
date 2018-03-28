@@ -36,4 +36,6 @@ public interface OutLibService {
     int updateByPrimaryKey(OutLib record);
 
     List<OutLib> listByQuery(OutLibQuery outLibQuery);
+
+    int insertSubmit(boolean b, Long goodsId, String name, Long goodsCount, Long userId, Long createUserId, String remark);
 }

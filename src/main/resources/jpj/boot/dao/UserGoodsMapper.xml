@@ -113,7 +113,7 @@
     update t_user_goods
     set
     goods_count = goods_count + #{count,jdbcType=BIGINT},
-    update_time = now();
+    update_time = now()
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -4,6 +4,7 @@ import jpj.boot.dao.GoodsMapper;
 import jpj.boot.entity.Goods;
 import jpj.boot.entity.OutLib;
 import jpj.boot.entity.User;
+import jpj.boot.exception.BuisnessException;
 import jpj.boot.service.GoodsService;
 import jpj.boot.service.OutLibService;
 import jpj.boot.service.UserService;
@@ -24,6 +25,7 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsMapper goodsMapper;
     @Resource
     private OutLibService outLibService;
+
     @Override
     public int deleteByPrimaryKey(Long id) {
         return goodsMapper.deleteByPrimaryKey(id);
@@ -36,13 +38,13 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     @Transactional
-    public int insertSelective(Long userId,Goods record) {
+    public int insertSelective(Long userId, Goods record) {
         Date current = new Date();
         record.setUpdateTime(current);
         record.setCreateTime(current);
         int InsertCou = goodsMapper.insertSelective(record);
-        if(record.getCount() > 0L){
-            outLibService.insert(false, record.getId(),record.getName(), record.getCount(), userId, userId, "添加商品时添加的初始库存记录");
+        if (record.getCount() > 0L) {
+            outLibService.insert(false, record.getId(), record.getName(), record.getCount(), userId, userId, "添加商品时添加的初始库存记录");
         }
         return InsertCou;
     }
@@ -79,5 +81,14 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public int deleteGoodsByPrimaryKey(Long id) {
         return goodsMapper.deleteGoodsByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateCount(Long goodsId, Long goodsCount) {
+        int count = goodsMapper.updateCount(goodsId, goodsCount);
+        if(count == 0){
+            throw new BuisnessException("库存不足");
+        }
+        return count;
     }
 }

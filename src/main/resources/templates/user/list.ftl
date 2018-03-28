@@ -18,8 +18,6 @@
             ]],
             <#--//data:${enums},-->
             loadFilter:function(data){
-                console.log(data)
-                var page = data.body;
                 reload_page("user_pp",data);
                 return data.body.list;
             },
@@ -172,17 +170,7 @@
                     });
                 }
             });
-            var reload_page = function(id, data){
-                var page = data.body;
-                if(page){
-                    $('#'+id).pagination('refresh',{	// 改变选项，并刷新分页栏信息
-                        total: page.total,
-                        pageNumber: page.pageNum,
-                        pageSize: page.pageSize
 
-                    });
-                }
-            }
         </script>
     </div>
 </div>

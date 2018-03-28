@@ -1,5 +1,7 @@
 package jpj.boot.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import jpj.boot.cache.UserCache;
 import jpj.boot.dto.SubmitGoodsDto;
 import jpj.boot.dto.SubmitOutLibDto;
@@ -14,6 +16,7 @@ import jpj.boot.service.TEnumService;
 import jpj.boot.util.BeanValidator;
 import jpj.boot.util.DateHelper;
 import jpj.boot.util.HttpSessionUtil;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,8 +40,9 @@ public class OutLibController {
     private TEnumService tEnumService;
     @Resource
     private GoodsService goodsService;
+
     @RequestMapping("/list")
-    public ModelAndView list(){
+    public ModelAndView list() {
         ModelAndView mav = new ModelAndView("/outlib/list");
         TEnum tEnum = tEnumService.selectByCode("outlibroot");
         if (tEnum != null && tEnum.getType() == 2) {
@@ -50,24 +54,36 @@ public class OutLibController {
 //        }
         return mav;
     }
+
+    @ResponseBody
     @RequestMapping("/listAll")
-    public List<OutLib> listAll(HttpServletRequest request){
+    public PageInfo listAll(HttpServletRequest request) {
         String startDate = request.getParameter("datestart");
         String endDate = request.getParameter("dateend");
         Date start = DateHelper.getDateStart(DateHelper.parseString(startDate, DateHelper.pattern_date));
         Date end = DateHelper.getDateEnd(DateHelper.parseString(endDate, DateHelper.pattern_date));
-
+        int pageNumber = NumberUtils.toInt(request.getParameter("pageNumber"), 1);
+        int pageSize = NumberUtils.toInt(request.getParameter("pageSize"), 20);
+        PageHelper.startPage(pageNumber, pageSize);
         OutLibQuery outLibQuery = new OutLibQuery();
         outLibQuery.setStart(start);
         outLibQuery.setEnd(end);
-
-        return outLibService.listByQuery(outLibQuery);
+        PageInfo pageInfo = new PageInfo(outLibService.listByQuery(outLibQuery));
+        return pageInfo;
     }
+
     @RequestMapping("/add")
-    public ModelAndView add() {
-        ModelAndView mav = new ModelAndView("/goods/add");
-        if(UserCache.CACHE_SALES != null){
+    public ModelAndView add(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("/outlib/add");
+        List<Goods> list = goodsService.listAll();
+        Long createUserId = HttpSessionUtil.getUserId(request.getSession());
+        String userName = (String)request.getSession().getAttribute(request.getSession().getId());
+        if (UserCache.CACHE_SALES != null) {
+
+            mav.addObject("defaultId", createUserId);
+            mav.addObject("defaultName", userName);
             mav.addObject("sales", UserCache.CACHE_SALES);
+            mav.addObject("goods", list);
         }
         return mav;
     }
@@ -78,10 +94,18 @@ public class OutLibController {
         BeanValidator.validator(dto);
         Long createUserId = HttpSessionUtil.getUserId(request.getSession());
         Goods goods = goodsService.selectByPrimaryKey(dto.getGoodsId());
-        if(goods == null){
+        if (goods == null) {
             throw new BuisnessException("商品不存在 ！");
         }
-        outLibService.insert(dto.isOut(), dto.getGoodsId(), goods.getName(), dto.getGoodsCount(), dto.getUserId(), createUserId, dto.getRemark());
+        Long goodsCount = Math.abs(dto.getGoodsCount());
+        if (dto.getIsOut() == 1) {//出库数据为负数
+            goodsCount = -goodsCount;
+        }
+        if(goods.getCount() + goodsCount < 0){
+            throw new BuisnessException("库存不足");
+        }
+        Long userId = dto.getUserId() == 0 ? createUserId : dto.getUserId();
+        outLibService.insertSubmit((dto.getIsOut() == 1), dto.getGoodsId(), goods.getName(), dto.getGoodsCount(), userId, createUserId, dto.getRemark());
         return true;
     }
 }

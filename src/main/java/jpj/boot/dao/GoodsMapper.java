@@ -1,6 +1,7 @@
 package jpj.boot.dao;
 
 import jpj.boot.entity.Goods;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface GoodsMapper {
     Goods selectByCode(String code);
 
     int deleteGoodsByPrimaryKey(Long id);
+
+    int updateCount(@Param("goodsId") Long goodsId, @Param("goodsCount") Long goodsCount);
 }

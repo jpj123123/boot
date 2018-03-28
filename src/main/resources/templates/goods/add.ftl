@@ -16,7 +16,7 @@
                 }else{
                     $.messager.show({
                         title:'提示',
-                        msg:data.body,
+                        msg:json.body,
                         timeout:3000,
                         showType:'slide'
                     });

@@ -8,7 +8,7 @@ import lombok.Data;
  */
 @Data
 public class SubmitOutLibDto {
-    private boolean isOut;
+    private Integer isOut;
     private Long userId;
     private Long goodsId;
     private Long goodsCount;

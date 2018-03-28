@@ -160,8 +160,18 @@
   </update>
   <update id="deleteGoodsByPrimaryKey" parameterType="java.lang.Long" >
     update t_goods
+    SET
     isused = 0,
     update_time = NOW()
     where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateCount">
+    update t_goods
+    SET
+    `count` = `count`+#{goodsCount},
+    update_time = NOW()
+    WHERE id = #{goodsId,jdbcType=BIGINT}
+    AND `count`>= -#{goodsCount}
+
   </update>
 </mapper>
